@@ -1,5 +1,6 @@
 package jeu;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -7,86 +8,188 @@ import devintAPI.FenetreAbstraite;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.TimerTask;
+import java.util.Timer;
 
-/** Etend DevintFrame pour avoir un Frame et réagir aux évênements claviers
- * Contient un exemple d'affichage d'image proportionnel à la taille de l'écran
+/**
+ * Etend DevintFrame pour avoir un Frame et rï¿½agir aux ï¿½vï¿½nements claviers
+ * Contient un exemple d'affichage d'image proportionnel ï¿½ la taille de l'ï¿½cran
  * 
  * @author helene
- *
+ * 
  */
 
 public class UneImage extends FenetreAbstraite {
+    JLabel jl2;
+    Grille grille;
 
     public UneImage(String title) {
-    	super(title);
-     }
+        super(title);
+    }
 
-	// renvoie le fichier wave contenant le message d'accueil
-	protected  String wavAccueil() {
-		return "../ressources/sons/accueilImage.wav";
-	}
-	
-	// renvoie le fichier wave contenant la règle du jeu
-	protected  String wavRegleJeu() {
-		return "../ressources/sons/accueilImage.wav";
-	}
-	
-	// renvoie le fichier wave contenant la règle du jeu
-	protected  String wavAide() {
-		return "../ressources/sons/aide.wav";
-	}
-    
-    // initialise le frame 
+    // renvoie le fichier wave contenant le message d'accueil
+    protected String wavAccueil() {
+        return "../ressources/sons/accueilImage.wav";
+    }
+
+    // renvoie le fichier wave contenant la rï¿½gle du jeu
+    protected String wavRegleJeu() {
+        return "../ressources/sons/accueilImage.wav";
+    }
+
+    // renvoie le fichier wave contenant la rï¿½gle du jeu
+    protected String wavAide() {
+        return "../ressources/sons/aide.wav";
+    }
+
+    // initialise le frame
     protected void init() {
-    	// FlowLayout : les composants ont leur taille fixée par setPreferredSize
-    	// et sont ajoutés de gauche à droite, de haut en bas
-    	setLayout(new FlowLayout());
+        // FlowLayout : les composants ont leur taille fixï¿½e par
+        // setPreferredSize
+        // et sont ajoutï¿½s de gauche ï¿½ droite, de haut en bas
 
-    	// la largeur et la hauteur actuelle de la fenêtre
-    	// si vous fixez la taille des éléments graphiques 
-    	// faites le en utilisant des valeurs proportionnelles à la taille
-    	// de la fenêtre pour que différentes résolutions d'écran soient possibles
-    	int largeur = Toolkit.getDefaultToolkit().getScreenSize().width;
-    	int hauteur = Toolkit.getDefaultToolkit().getScreenSize().height;
+        // la largeur et la hauteur actuelle de la fenï¿½tre
+        // si vous fixez la taille des ï¿½lï¿½ments graphiques
+        // faites le en utilisant des valeurs proportionnelles ï¿½ la taille
+        // de la fenï¿½tre pour que diffï¿½rentes rï¿½solutions d'ï¿½cran soient
+        // possibles
+        int largeur = Toolkit.getDefaultToolkit().getScreenSize().width;
+        int hauteur = Toolkit.getDefaultToolkit().getScreenSize().height;
 
-    	String  texte = "\nIci le layout est un \"FlowLayout\". Les composants sont ajoutés de gauche à droite et de haut en bas.";
-    	texte += "\nLa taille des composants est celle de \"setPreferredSize\" ou bien la taille optimale pour obtenir un frame le plus petit possible.";
-    	texte += "\n\nVoici les personnages du jeu Léa et Théo, 2007.";
-    	JTextArea theoTexte = new JTextArea(texte);
-    	theoTexte.setLineWrap(true);
-    	theoTexte.setEditable(false);
-    	add(theoTexte);
+        // une image, voir
+        // http://java.sun.com/docs/books/tutorial/uiswing/components/icon.html
+        /*
+         * ImageIcon icon = new ImageIcon("../ressources/images/stickman.gif");
+         * JLabel jl = new JLabel(icon,JLabel.CENTER); jl.setAutoscrolls(true);
+         * jl.add(new Scrollbar()); // fond bleu jl.setBackground(Color.BLUE);
+         * //composant opaque pour voir le fond bleu jl.setOpaque(true); //
+         * (largeur de la fenetre)/2 et (hauteur fenetre)/3
+         * jl.setPreferredSize(new Dimension(largeur/2,hauteur/3)); add(jl);
+         */
 
-    	// une image, voir http://java.sun.com/docs/books/tutorial/uiswing/components/icon.html
-    	ImageIcon icon = new ImageIcon("../ressources/images/theo.JPG");
-    	texte =  "Théo est dans un label a un fond bleu qui occupe la moitié de la largeur et le tiers de la hauteur.";
-    	// on met l'image dans un label
-    	JLabel jl = new JLabel(texte,icon,JLabel.CENTER);
-    	jl.setAutoscrolls(true);
-    	jl.add(new Scrollbar());
-    	// fond bleu
-    	jl.setBackground(Color.BLUE);
-    	//composant opaque pour voir le fond bleu
-    	jl.setOpaque(true); 
-    	// (largeur de la fenetre)/2 et (hauteur fenetre)/3
-    	jl.setPreferredSize(new Dimension(largeur/2,hauteur/3));
-    	add(jl);
+        // Lï¿½a
+        /*
+         * ImageIcon icon = new ImageIcon("../ressources/images/stickman.gif");
+         * jl2 = new JLabel(icon); jl2.setLocation(300,100); add(jl2);
+         */
 
-    	// Léa
-    	icon = new ImageIcon("../ressources/images/lea.JPG");
-    	texte = "Ceci est Léa";
-    	JLabel jl2 = new JLabel(texte,icon,JLabel.CENTER);
-    	add(jl2);
-   }
+        grille = new Grille(largeur, hauteur);
+        grille.addKeyListener(this);
+        add(grille);
 
-	@Override
-	/** 
-	 * pour cette fenêtre, changer la couleur n'a pas de sens, alors la méthode
-	 * ne fait rien
-	 */
-	public void changeColor() {
-		// TODO Auto-generated method stub
-	}
+        setVisible(true);
+        // addKeyListener(this);
+    }
 
-    
+    @Override
+    /** 
+     * pour cette fenï¿½tre, changer la couleur n'a pas de sens, alors la mï¿½thode
+     * ne fait rien
+     */
+    public void changeColor() {
+        // TODO Auto-generated method stub
+    }
+
+    public void keyPressed(KeyEvent e) {
+        super.keyPressed(e);
+        Point nextPosition = new Point(
+                grille.getTableDesObjets()[0].getAbscisse(),
+                grille.getTableDesObjets()[0].getOrdonnee());
+        Point nextPosition2 = new Point(
+                grille.getTableDesObjets()[0].getAbscisse(),
+                grille.getTableDesObjets()[0].getOrdonnee());
+        
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            nextPosition2 = new Point(
+                    grille.getTableDesObjets()[0].getAbscisse() - 10,
+                    grille.getTableDesObjets()[0].getOrdonnee());
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            nextPosition2 = new Point(
+                    grille.getTableDesObjets()[0].getAbscisse() + 10,
+                    grille.getTableDesObjets()[0].getOrdonnee());
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            nextPosition2 = new Point(
+                    grille.getTableDesObjets()[0].getAbscisse(),
+                    grille.getTableDesObjets()[0].getOrdonnee() + 10);
+        } else if (e.getKeyCode() == KeyEvent.VK_UP) {
+            nextPosition2 = new Point(
+                    grille.getTableDesObjets()[0].getAbscisse(),
+                    grille.getTableDesObjets()[0].getOrdonnee() - 10);
+            /*
+            Thread t = new Thread() {
+                public void run() {
+                    for (int i = 0; i < 10; i++) {
+                        grille.getTableDesObjets()[0]
+                                .deplacer(new Point(grille.getTableDesObjets()[0]
+                                        .getAbscisse(),
+                                        grille.getTableDesObjets()[0]
+                                                .getOrdonnee() - 10));
+                        grille.repaint();
+                        try {
+                            Thread.sleep(10);
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    for (int i = 0; i < 10; i++) {
+                        grille.getTableDesObjets()[0]
+                                .deplacer(new Point(grille.getTableDesObjets()[0]
+                                        .getAbscisse(),
+                                        grille.getTableDesObjets()[0]
+                                                .getOrdonnee() + 10));
+                        grille.repaint();
+                        try {
+                            Thread.sleep(10);
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            };
+            t.start();
+            */
+        }
+        boolean check=true;
+        for(int i=1; i<grille.getNbFigures();i++)
+        {
+            if(grille.getTableDesObjets()[i]==null)
+                System.out.println("HELLO");
+            
+            if(grille.getTableDesObjets()[0].intersects(new Rectangle(((Rectangle) grille.getTableDesObjets()[i]).getLongueur(),((Rectangle) grille.getTableDesObjets()[i]).getHauteur() ,nextPosition2 )))
+            {
+                check=false;
+            } 
+               
+        }
+        if(check)
+            nextPosition=nextPosition2;
+        
+        
+        grille.getTableDesObjets()[0].deplacer(nextPosition);
+        grille.repaint();
+        
+    }
+
+    @Override
+    public void keyReleased(KeyEvent arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent arg0) {
+        // TODO Auto-generated method stub
+
+    }
 }
