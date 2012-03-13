@@ -1,0 +1,1 @@
+INDEX VERSION 1.126+C:\Users\user\Documents\Cours\Projet_DEVINT\.metadata\.plugins\org.eclipse.jdt.core
