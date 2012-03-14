@@ -66,5 +66,10 @@ public class Grille extends Canvas {
             {
                 tableDesObjets[i].dessiner(g2);//on dessine les figures avec de l'anti-aliasing
             }
+            
     }
+    /*public void update(Graphics g){
+    	tableDesObjets[0].dessiner(g);
+    }*/
+    
 }

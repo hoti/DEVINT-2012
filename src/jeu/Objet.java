@@ -7,8 +7,9 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
-public abstract class Objet {
+public abstract class Objet extends JPanel{
     protected Point origine;
     protected Color couleur; // Couleur de la figure
     protected boolean filled; //figure remplie ou pas
