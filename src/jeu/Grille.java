@@ -73,6 +73,7 @@ public class Grille extends Canvas {
                 tableDesObjets[i].dessiner(g2);//on dessine les figures avec de l'anti-aliasing
             }
             
+<<<<<<< HEAD
             
     }
     
@@ -82,5 +83,11 @@ public class Grille extends Canvas {
         {
             tableDesObjets[0].deplacer(new Point(tableDesObjets[0].getAbscisse(),tableDesObjets[0].getOrdonnee()+10));
         }
+=======
+>>>>>>> b87efd1fa923f2a677f76c8a654664061187edf4
     }
+    /*public void update(Graphics g){
+    	tableDesObjets[0].dessiner(g);
+    }*/
+    
 }

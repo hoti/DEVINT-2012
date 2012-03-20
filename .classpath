@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="/home/hoti/java_wp/devint/VocalyzeSIVOX/bin/SI_VOX.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl.jar">
@@ -13,5 +14,9 @@
 			<attribute name="javadoc_location" value="file:/home/hoti/slick/javadoc/"/>
 		</attributes>
 	</classpathentry>
+=======
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="C:/Users/user/Documents/Cours/Projet_DEVINT/VocalyzeSIVOX/bin/SI_VOX.jar"/>
+>>>>>>> b87efd1fa923f2a677f76c8a654664061187edf4
 	<classpathentry kind="output" path="bin"/>
 </classpath>

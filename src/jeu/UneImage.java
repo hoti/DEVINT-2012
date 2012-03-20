@@ -172,10 +172,24 @@ public class UneImage extends FenetreAbstraite {
         if(check)
         {
             nextPosition=nextPosition2;
+<<<<<<< HEAD
         }
 
         grille.getTableDesObjets()[0].deplacer(nextPosition);
         grille.repaint();
+=======
+        
+        int x=(int)((jeu.Rectangle) grille.getTableDesObjets()[0]).getLongueur();
+        int y=(int)((jeu.Rectangle) grille.getTableDesObjets()[0]).getHauteur();
+        grille.getTableDesObjets()[0].deplacer(nextPosition2);
+       grille.repaint((int)nextPosition.abscisse(),(int)nextPosition.ordonnee(),
+        		x,y);
+        grille.repaint((int)nextPosition2.abscisse(),(int)nextPosition2.ordonnee(),
+        		x,y);
+        
+       //grille.repaint();
+        
+>>>>>>> b87efd1fa923f2a677f76c8a654664061187edf4
     }
 
     
