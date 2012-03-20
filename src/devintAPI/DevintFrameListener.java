@@ -9,13 +9,13 @@ import javax.swing.WindowConstants;
 import t2s.SIVOXDevint;
 
 /**
- * classe abstraite pour un JFrame qui réagit aux évênements clavier
+ * classe abstraite pour un JFrame qui rï¿½agit aux ï¿½vï¿½nements clavier
  * 
- * les menus des jeux DeViNT et les fenêtres des jeux DeViNT doivent réagir 
- * aux évênements clavier de cette façon.
+ * les menus des jeux DeViNT et les fenï¿½tres des jeux DeViNT doivent rï¿½agir 
+ * aux ï¿½vï¿½nements clavier de cette faï¿½on.
  * 
- * vous pouvez surcharger les méthodes  dans les classes filles en ajoutant des
- * touches auxquelles votre jeu réagit.
+ * vous pouvez surcharger les mï¿½thodes  dans les classes filles en ajoutant des
+ * touches auxquelles votre jeu rï¿½agit.
  * 
  * @author helen
  *
@@ -26,48 +26,48 @@ public abstract class DevintFrameListener extends JFrame implements KeyListener 
     protected SIVOXDevint voix; 
 
 	/**
-	 * renvoie le nom du fichier wav à lire quand la fenêtre s'ouvre
-	 * Nota : le chemin est relatif au répertoire bin
+	 * renvoie le nom du fichier wav ï¿½ lire quand la fenï¿½tre s'ouvre
+	 * Nota : le chemin est relatif au rï¿½pertoire bin
 	 */
 	protected abstract String wavAccueil();
 
 	/**
-	 * renvoie le nom du fichier wav à lire pour l'objectif du jeu
+	 * renvoie le nom du fichier wav ï¿½ lire pour l'objectif du jeu
 	 * qui est lu en activant F1
 	 */
 	protected abstract String wavRegleJeu();
 	
 	
 	/** 
-	 * definit comment la fenêtre change de couleur quand on clique sur F3
-	 * Cette méthode est appelée dans la classe Preferences, sur toutes les fenêtres ouvertes
+	 * definit comment la fenï¿½tre change de couleur quand on clique sur F3
+	 * Cette mï¿½thode est appelï¿½e dans la classe Preferences, sur toutes les fenï¿½tres ouvertes
 	 */
 	public abstract void changeColor() ;
 	
 	
 	public DevintFrameListener(String title) {
 		super(title);
-    	// prend toute la taille de la fenêtre
+    	// prend toute la taille de la fenï¿½tre
     	this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        // on ferme la fenêtre en cliquant sur la croix 
+        // on ferme la fenï¿½tre en cliquant sur la croix 
     	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-     	// écoute les évènements clavier
+     	// ï¿½coute les ï¿½vï¿½nements clavier
        	addKeyListener(this);
-       	//ajoute cette fenêtre aux Frame reconnus par Preferences pour gérer 
+       	//ajoute cette fenï¿½tre aux Frame reconnus par Preferences pour gï¿½rer 
     	// le changement de couleur/voix
     	Preferences.getData().addDevintFrame(this);
-       	// on récupère la voix donnée dans les préférences
+       	// on rï¿½cupï¿½re la voix donnï¿½e dans les prï¿½fï¿½rences
     	voix = Preferences.getData().getVoice();
  	}
 	
     /** gestion des touches
-     * ESC fait sortir de la fenêtre courante
+     * ESC fait sortir de la fenï¿½tre courante
      * F1 invoque l'aide
-     * Cette méthode peut être surchargée par héritage pour réagir à d'autres touches
+     * Cette mï¿½thode peut ï¿½tre surchargï¿½e par hï¿½ritage pour rï¿½agir ï¿½ d'autres touches
      * (voir un exemple dans la classe Jeu)
      */
     public void keyPressed(KeyEvent e) {
-    	// toujours arrêter la voix courante quand l'utilisateur fait une action
+    	// toujours arrï¿½ter la voix courante quand l'utilisateur fait une action
     	voix.stop();
     	// escape = sortir
     	if (e.getKeyCode()==KeyEvent.VK_ESCAPE){
@@ -77,19 +77,19 @@ public abstract class DevintFrameListener extends JFrame implements KeyListener 
     	if (e.getKeyCode()==KeyEvent.VK_F1){
     		voix.playWav(wavRegleJeu());
     	}
-		// F3 = on passe à la couleur suivante dans le jeu des 
-    	// couleurs défini dans Preferences
+		// F3 = on passe ï¿½ la couleur suivante dans le jeu des 
+    	// couleurs dï¿½fini dans Preferences
 		if (e.getKeyCode() == KeyEvent.VK_F3) {
 			Preferences.getData().changeColor();
 		}
-		// F4 = voix suivante défini dans Preferences
+		// F4 = voix suivante dï¿½fini dans Preferences
 		if (e.getKeyCode() == KeyEvent.VK_F4) {
 			Preferences.getData().changeVoice();
 		}
     }
     
-    // méthodes nécessaires pour l'interface KeyListener
-    // à redéfinir si besoin dans les classes filles pour gérer les clics souris
+    // mï¿½thodes nï¿½cessaires pour l'interface KeyListener
+    // ï¿½ redï¿½finir si besoin dans les classes filles pour gï¿½rer les clics souris
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e){} {}
 }
