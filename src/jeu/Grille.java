@@ -2,25 +2,29 @@ package jeu;
 
 import java.awt.*;
 import java.awt.image.*;
+import java.awt.event.*;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
 
 public class Grille extends Canvas {
     private static final int NBFIGMAX=10000;
+
+    private static final int FREQ = 2000;
     
     private int longueur;
     private int hauteur;
     private int nbFigures=0;//Nombre de figures actuel
     
     private Objet[] tableDesObjets;
+    private Timer gravity = new Timer(FREQ,new GravityListener());
     
     public Grille(int l, int h)
     {
+        gravity.start();
         hauteur=h;
         longueur=l;
         tableDesObjets=new Objet[NBFIGMAX];
@@ -38,6 +42,8 @@ public class Grille extends Canvas {
         tableDesObjets[1]=new Rectangle(l,200, new Point(0,h-200));
         tableDesObjets[1].changerCouleur(Color.WHITE);
         nbFigures++;
+        
+        
     }
     
     public int getNbFigures()
@@ -66,7 +72,14 @@ public class Grille extends Canvas {
             {
                 tableDesObjets[i].dessiner(g2);//on dessine les figures avec de l'anti-aliasing
             }
-            
+    }
+    
+    private class GravityListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent event)
+        {
+            tableDesObjets[0].deplacer(new Point(tableDesObjets[0].getAbscisse(),tableDesObjets[0].getOrdonnee()+10));
+        }
     }
     /*public void update(Graphics g){
     	tableDesObjets[0].dessiner(g);

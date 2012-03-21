@@ -162,18 +162,17 @@ public class UneImage extends FenetreAbstraite {
         }
         boolean check=true;
         for(int i=1; i<grille.getNbFigures();i++)
-        {
-            if(grille.getTableDesObjets()[i]==null)
-                System.out.println("HELLO");
-            
-            if(grille.getTableDesObjets()[0].intersects(new Rectangle(((Rectangle) grille.getTableDesObjets()[i]).getLongueur(),((Rectangle) grille.getTableDesObjets()[i]).getHauteur() ,nextPosition2 )))
+        {   
+            if(((Rectangle) grille.getTableDesObjets()[i]).intersects(new Rectangle(((Rectangle) grille.getTableDesObjets()[0]).getLongueur(),((Rectangle) grille.getTableDesObjets()[0]).getHauteur() ,nextPosition2 )))
             {
                 check=false;
-            } 
-               
+            }                
         }
+        
         if(check)
+        {
             nextPosition=nextPosition2;
+        }
         
         int x=(int)((jeu.Rectangle) grille.getTableDesObjets()[0]).getLongueur();
         int y=(int)((jeu.Rectangle) grille.getTableDesObjets()[0]).getHauteur();
@@ -184,18 +183,7 @@ public class UneImage extends FenetreAbstraite {
         		x,y);
         
        //grille.repaint();
-        
     }
 
-    @Override
-    public void keyReleased(KeyEvent arg0) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void keyTyped(KeyEvent arg0) {
-        // TODO Auto-generated method stub
-
-    }
+    
 }
