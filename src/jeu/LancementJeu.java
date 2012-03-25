@@ -1,7 +1,7 @@
 package jeu;
 
 /** classe pour lancer le jeu
- * Elle créé simplement une instance de MenuJeu
+ * Elle crï¿½ï¿½ simplement une instance de MenuJeu
  * 
  * @author helene
  *

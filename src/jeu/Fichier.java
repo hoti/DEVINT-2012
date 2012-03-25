@@ -39,30 +39,30 @@ import java.io.IOException;
 
 public class Fichier extends FenetreAbstraite implements ActionListener{
 
-	// le bouton pour créer un fichier
-	// doit être accessible dans la méthode actionPerformed 
+	// le bouton pour crï¿½er un fichier
+	// doit ï¿½tre accessible dans la mï¿½thode actionPerformed 
 	private JButton ecrire;
 
 	// le bouton pour lire un fichier
 	private JButton lire;
 
-	// appel au constructeur de la classe mère
+	// appel au constructeur de la classe mï¿½re
     public Fichier(String title) {
     	super(title);
      }
 
-    // définition de la méthode abstraite "init()"
+    // dï¿½finition de la mï¿½thode abstraite "init()"
     // initialise le frame 
     protected void init() {
     	// BorderLayout, voir http://java.sun.com/docs/books/tutorial/uiswing/layout/border.html
     	setLayout(new BorderLayout());
  
     	String text = " Voici le chemin vers un fichier score.txt " +
-		"pour y sauver les scores et les paramètres:\n.";
+		"pour y sauver les scores et les paramï¿½tres:\n.";
     	text += ".." + File.separator + "ressources" + File.separator + "score.txt\n\n";
-    	text+= "Cliquez sur le bouton du haut et vérifiez si le fichier a été créé\n";
+    	text+= "Cliquez sur le bouton du haut et vï¿½rifiez si le fichier a ï¿½tï¿½ crï¿½ï¿½\n";
        	text+= "Cliquez sur le bouton du bas pour lire les scores\n\n";
-      	text += "Lisez le code de la méthode actionPerformed pour savoir comment écrire dans le fichier";
+      	text += "Lisez le code de la mï¿½thode actionPerformed pour savoir comment ï¿½crire dans le fichier";
 
      	JTextArea lb1 = new JTextArea (text); 
     	lb1.setLineWrap(true);
@@ -71,13 +71,13 @@ public class Fichier extends FenetreAbstraite implements ActionListener{
     	// on place le premier composant en bas
     	this.add(lb1,BorderLayout.CENTER);
     	
-    	// bouton pour lancer l'écriture dans le fichier
+    	// bouton pour lancer l'ï¿½criture dans le fichier
     	ecrire = new JButton();
-    	ecrire.setText("Cliquer pour écrire le fichier des scores");
+    	ecrire.setText("Cliquer pour ï¿½crire le fichier des scores");
     	ecrire.setBackground(new Color(255,105,180));
     	ecrire.setBorder(new LineBorder(Color.BLACK,5));
      	ecrire.setFont(new Font("Georgia",1,40));
-     	// c'est l'objet Jeu lui-même qui réagit au clic souris
+     	// c'est l'objet Jeu lui-mï¿½me qui rï¿½agit au clic souris
        	ecrire.addActionListener(this);
     	// on met le bouton en haut
      	this.add(ecrire,BorderLayout.NORTH);
@@ -89,7 +89,7 @@ public class Fichier extends FenetreAbstraite implements ActionListener{
     	lire.setForeground(new Color(250,250,210));
     	lire.setBorder(new LineBorder(Color.BLACK,10));
     	lire.setFont(new Font("Georgia",1,40));
-     	// c'est l'objet Jeu lui-même qui réagit au clic souris
+     	// c'est l'objet Jeu lui-mï¿½me qui rï¿½agit au clic souris
     	lire.addActionListener(this);
     	// on met le bouton en haut
      	this.add(lire,BorderLayout.SOUTH);
@@ -100,18 +100,18 @@ public class Fichier extends FenetreAbstraite implements ActionListener{
     public void actionPerformed(ActionEvent ae){
        	// toujours stopper la voix avant de parler
     	voix.stop();
-    	// on récupère la source de l'évènement
+    	// on rï¿½cupï¿½re la source de l'ï¿½vï¿½nement
      	Object source = ae.getSource();
      	// si c'est le bouton "ecrire" 
     	if (source.equals(ecrire)) {
     		String text = " voici le chemin vers un fichier score.txt " +
-    				"pour y sauver les scores et les paramètres.";
+    				"pour y sauver les scores et les paramï¿½tres.";
     		voix.playText(text);
     		String chemin = ".." + File.separator + "ressources" + File.separator + "score.txt";
-    		// écriture dans le fichier score
+    		// ï¿½criture dans le fichier score
     		try {
     			FileWriter w = new FileWriter(chemin);
-    			w.write("Hélène : 15\n");
+    			w.write("Hï¿½lï¿½ne : 15\n");
     			w.write("Jean-Paul : 20\n");
     			w.write("Catherine : 16\n");
     			w.close();
@@ -124,7 +124,7 @@ public class Fichier extends FenetreAbstraite implements ActionListener{
     	// si c'est le bouton lire
       	if (source.equals(lire)) {
     		String chemin = ".." + File.separator + "ressources" + File.separator + "score.txt";
-    		// on lit le fichier de score et on fait dire chaque ligne par la synthèse vocale
+    		// on lit le fichier de score et on fait dire chaque ligne par la synthï¿½se vocale
     		try {
     			BufferedReader l = new BufferedReader(new FileReader(chemin));
     			String line = l.readLine();
@@ -146,7 +146,7 @@ public class Fichier extends FenetreAbstraite implements ActionListener{
 
     	
     	// on redonne le focus au JFrame principal 
-    	// (après un clic, le focus est sur le bouton)
+    	// (aprï¿½s un clic, le focus est sur le bouton)
     	this.requestFocus();
     }
 
@@ -159,12 +159,12 @@ public class Fichier extends FenetreAbstraite implements ActionListener{
 		return "../ressources/sons/accueilFichier.wav";
 	}
 	
-	// renvoie le fichier wave contenant la règle du jeu
+	// renvoie le fichier wave contenant la rï¿½gle du jeu
 	protected  String wavRegleJeu() {
 		return "../ressources/sons/accueilFichier.wav";
 	}
 	
-	// renvoie le fichier wave contenant la règle du jeu
+	// renvoie le fichier wave contenant la rï¿½gle du jeu
 	protected  String wavAide() {
 		return "../ressources/sons/aide.wav";
 	}

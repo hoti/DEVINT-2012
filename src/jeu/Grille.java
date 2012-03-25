@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
+
 public class Grille extends Canvas {
     private static final int NBFIGMAX=10000;
 

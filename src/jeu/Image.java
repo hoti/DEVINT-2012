@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+
 public class Image extends Rectangle /*implements ImageObserver*/ {
     protected java.awt.Image img;
     //Graphics bufferGraphics;
