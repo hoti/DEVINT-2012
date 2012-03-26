@@ -1,4 +1,4 @@
-package jeu;
+package slick;
 
 /** classe pour lancer le jeu
  * Elle cr�� simplement une instance de MenuJeu
@@ -9,7 +9,7 @@ package jeu;
 public class LancementJeu{
 
     public static void main(String args[]){
-        new jeu.MenuJeu("Exemple de jeu");
+        new MenuJeu();
     }
 
 }

@@ -6,7 +6,9 @@
  *     - wavAide() qui renvoie le nom du fichier wav lu lors de l'activation de la touche F1
  */
 
-package jeu; 
+package slick; 
+
+import org.newdawn.slick.SlickException;
 
 import devintAPI.MenuAbstrait;
 
@@ -15,15 +17,15 @@ public class MenuJeu extends MenuAbstrait {
 	/** constructeur
 	 * @param title : le nom du jeu 
 	 */
-	public MenuJeu(String title) {
-		super(title);
+	public MenuJeu() {
+		super("Menu de jeu");
 	}
 
 	/** renvoie le nom des options du menu
      * vous pouvez d�finir autant d'options que vous voulez
      **/
 	protected String[] nomOptions() {
-		String[] noms = {"Jouer","Image","Options","Fichiers","Quitter"};
+		String[] noms = {"Jouer","Choix du niveau", "Niveau de difficulté", "Choix des couleurs", "Quitter"};
 		return noms;
 	}
 
@@ -32,11 +34,17 @@ public class MenuJeu extends MenuAbstrait {
 	 */
 	protected void lancerOption(int i) {
 		switch (i){  
-		case 0 : new Jeu(nomJeu);break;
-		case 1 : new UneImage(nomJeu + ": exemple d'images");break;
-		case 2 : new Option(nomJeu + ": gestion des options");break;
-		case 3 : new Fichier(nomJeu + ": pour �crire dans un fichier");break;
-		case 4 : System.exit(0);
+		case 0 : 
+		    Game game = new Game();
+		    try {
+                        game.launch();
+                    } catch (SlickException e) {}
+		    
+		    ;break;
+		case 1 : this.setVisible(false); new MenuNiveau(); break;
+		case 2 : this.setVisible(false); new MenuDifficulte(); break;
+		case 3 : this.setVisible(false); new MenuCouleurs(); break;
+		case 4 : System.exit(0); break;
 		default: System.err.println("action non d�finie");
 		}
 	} 

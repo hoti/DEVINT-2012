@@ -28,6 +28,7 @@ public class Game extends BasicGame {
     private boolean ALLER;
     private int step1;
     private int step;
+    private String imgPrefix="../ressources/images/";
 
     public Game() {
         super("one class barebone game");
@@ -39,9 +40,9 @@ public class Game extends BasicGame {
         container.setMinimumLogicUpdateInterval(12);
         container.setMaximumLogicUpdateInterval(12);
         
-        SpriteSheet sheet = new SpriteSheet("ressources/images/arret.png", 32,
+        SpriteSheet sheet = new SpriteSheet(imgPrefix+"arret.png", 32,
                 32);
-        map = new BlockMap("ressources/images/map1.tmx");
+        map = new BlockMap(imgPrefix+"map1.tmx");
         player = new Animation();
         // player.setAutoUpdate(true);
         for (int frame = 0; frame < 1; frame++) {
@@ -68,10 +69,10 @@ public class Game extends BasicGame {
         step++;
         if (step % NBSTEPCLIGNOTEMENT == 0) {
             if (CLIGNOTEMENT) {
-                map = new BlockMap("ressources/images/map2.tmx");
+                map = new BlockMap(imgPrefix+"map2.tmx");
                 CLIGNOTEMENT = false;
             } else {
-                map = new BlockMap("ressources/images/map1.tmx");
+                map = new BlockMap(imgPrefix+"map1.tmx");
                 CLIGNOTEMENT = true;
             }
         }
@@ -93,7 +94,7 @@ public class Game extends BasicGame {
 
             if (!GAUCHE) {
                 SpriteSheet sheet = new SpriteSheet(
-                        "ressources/images/gif3.png", 32, 32);
+                        imgPrefix+"gif3.png", 32, 32);
                 player = new Animation();
                 for (int frame = 0; frame < 6; frame++) {
                     player.addFrame(sheet.getSprite(frame, 0), 150);
@@ -115,7 +116,7 @@ public class Game extends BasicGame {
                 }
             }
         } else if (GAUCHE && !DROIT) {
-            SpriteSheet sheet = new SpriteSheet("ressources/images/arret.png",
+            SpriteSheet sheet = new SpriteSheet(imgPrefix+"arret.png",
                     32, 32);
             player = new Animation();
             for (int frame = 0; frame < 1; frame++) {
@@ -127,7 +128,7 @@ public class Game extends BasicGame {
         if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
             if (!DROIT) {
                 SpriteSheet sheet = new SpriteSheet(
-                        "ressources/images/gif4.png", 32, 32);
+                        imgPrefix+"gif4.png", 32, 32);
                 player = new Animation();
                 for (int frame = 0; frame < 6; frame++) {
                     player.addFrame(sheet.getSprite(frame, 0), 150);
@@ -150,7 +151,7 @@ public class Game extends BasicGame {
                 }
             }
         } else if (DROIT && !GAUCHE) {
-            SpriteSheet sheet = new SpriteSheet("ressources/images/arret.png",
+            SpriteSheet sheet = new SpriteSheet(imgPrefix+"arret.png",
                     32, 32);
             player = new Animation();
             for (int frame = 0; frame < 1; frame++) {
@@ -160,7 +161,7 @@ public class Game extends BasicGame {
         }
 
         if ((DROIT && GAUCHE) || (!DROIT && !GAUCHE)) {
-            SpriteSheet sheet = new SpriteSheet("ressources/images/arret.png",
+            SpriteSheet sheet = new SpriteSheet(imgPrefix+"arret.png",
                     32, 32);
             player = new Animation();
             for (int frame = 0; frame < 1; frame++) {
@@ -234,8 +235,7 @@ public class Game extends BasicGame {
         g.draw(plateforme);
 
     }
-
-    public static void main(String[] argv) throws SlickException {
+    public void launch() throws SlickException {
         AppGameContainer container = new AppGameContainer(new Game(), 640, 480,
                 false);
         container.start();

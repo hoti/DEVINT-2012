@@ -10,10 +10,11 @@ public class BlockMap {
 	public static int mapHeight;
 	private int square[] = {1,1,15,1,15,15,1,15}; //square shaped tile
 	public static ArrayList<Object> entities;
- 
+	private String imgPrefix="../ressources/images/";
+	
 	public BlockMap(String ref) throws SlickException {
 		entities = new ArrayList<Object>();
-		tmap = new TiledMap(ref, "ressources/images");
+		tmap = new TiledMap(ref, imgPrefix);
 		mapWidth = tmap.getWidth() * tmap.getTileWidth();
 		mapHeight = tmap.getHeight() * tmap.getTileHeight();
  
