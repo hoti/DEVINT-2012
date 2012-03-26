@@ -1,5 +1,6 @@
 package slick;
 
+import java.io.File;
 import java.util.ArrayList;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
@@ -10,7 +11,7 @@ public class BlockMap {
 	public static int mapHeight;
 	private int square[] = {1,1,15,1,15,15,1,15}; //square shaped tile
 	public static ArrayList<Object> entities;
-	private String imgPrefix="../ressources/images/";
+	private String imgPrefix=".."+File.separator+"ressources"+File.separator+"images"+File.separator;
 	
 	public BlockMap(String ref) throws SlickException {
 		entities = new ArrayList<Object>();

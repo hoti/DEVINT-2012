@@ -1,5 +1,7 @@
 package slick;
 
+import java.io.File;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -28,7 +30,7 @@ public class Game extends BasicGame {
     private boolean ALLER;
     private int step1;
     private int step;
-    private String imgPrefix="../ressources/images/";
+    private String imgPrefix=".."+File.separator+"ressources"+File.separator+"images"+File.separator;
 
     public Game() {
         super("one class barebone game");
