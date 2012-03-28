@@ -14,6 +14,9 @@ import devintAPI.MenuAbstrait;
 
 public class MenuJeu extends MenuAbstrait {
 
+	
+	private static final long serialVersionUID = 4221219143089907105L;
+
 	/** constructeur
 	 * @param title : le nom du jeu 
 	 */
@@ -22,11 +25,10 @@ public class MenuJeu extends MenuAbstrait {
 	}
 
 	/** renvoie le nom des options du menu
-     * vous pouvez d�finir autant d'options que vous voulez
+     * vous pouvez definir autant d'options que vous voulez
      **/
 	protected String[] nomOptions() {
-		String[] noms = {"Jouer","Choix du niveau", "Niveau de difficulté", "Choix des couleurs", "Quitter"};
-		return noms;
+		return new String[] {"Jouer","Choix du niveau", "Niveau de difficulte", "Choix des couleurs", "Quitter"};
 	}
 
 	/** lance l'action associ�e au bouton n�i
