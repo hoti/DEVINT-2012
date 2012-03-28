@@ -38,7 +38,7 @@ public class Game extends BasicGame {
 		container.setMaximumLogicUpdateInterval(15);
 		container.setMinimumLogicUpdateInterval(15);
 		container.setFullscreen(true);
-		map = new Playground(new BlockMap("ressources/images/map2.tmx"),0,0,0,0);
+		map = new Playground(new BlockMap("../ressources/images/map2.tmx"),0,0,0,0);
 		
 	
 
@@ -181,7 +181,7 @@ public class Game extends BasicGame {
  
 	}
  
-	public static void main(String[] argv) throws SlickException {
+	public void launch() throws SlickException{
 		AppGameContainer container = 
 			new AppGameContainer(new Game(), 640, 480, false);
 		container.start();
