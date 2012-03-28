@@ -3,12 +3,17 @@ package jeu;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.SlickException;
+
+import slick.Game;
+
 import devintAPI.FenetreAbstraite;
 import devintAPI.Preferences;
 
 import java.awt.*;
 import java.awt.event.*;
-
+import slick.*;
 /** Cette classe est un exemple d'interface de jeu.
  *  Elle étend DevintFrame pour avoir un Frame et réagir aux évênements claviers
  * Implémente ActionListener pour réagir au clic souris sur le bouton.
@@ -33,6 +38,7 @@ public class Jeu extends FenetreAbstraite implements ActionListener{
 	// appel au constructeur de la classe mère
     public Jeu(String title) {
     	super(title);
+
      }
     
 	// renvoie le fichier wave contenant le message d'accueil
@@ -110,6 +116,8 @@ public class Jeu extends FenetreAbstraite implements ActionListener{
        	question.addActionListener(this);
     	// on met le bouton à droite
      	this.add(question,BorderLayout.EAST);
+    	
+ 
    }
 
     // lire la question si clic sur le bouton 

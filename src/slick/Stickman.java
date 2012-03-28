@@ -29,11 +29,11 @@ public class Stickman {
 	private static final int Heigth=30;
 	
 	
-	private static final String pathAnimGauche="ressources/images/gif3W.png";
-	private static final String pathAnimDroite="ressources/images/gif4W.png";
-	private static final String pathAnimArret="ressources/images/arretW.png";
-	private static final String pathAnimSaut="ressources/images/tombeW.png";
-	private static final String pathAnimDead="ressources/images/deadW.png";
+	private static final String pathAnimGauche="../ressources/images/gif3W.png";
+	private static final String pathAnimDroite="../ressources/images/gif4W.png";
+	private static final String pathAnimArret="../ressources/images/arretW.png";
+	private static final String pathAnimSaut="../ressources/images/tombeW.png";
+	private static final String pathAnimDead="../ressources/images/deadW.png";
 
 	
 	private SpriteSheet sheet1;

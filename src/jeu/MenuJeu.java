@@ -8,6 +8,10 @@
 
 package jeu; 
 
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.SlickException;
+
+import slick.Game;
 import devintAPI.MenuAbstrait;
 
 public class MenuJeu extends MenuAbstrait {
@@ -32,7 +36,21 @@ public class MenuJeu extends MenuAbstrait {
 	 */
 	protected void lancerOption(int i) {
 		switch (i){  
-		case 0 : new Jeu(nomJeu);break;
+		case 0 :    	
+		AppGameContainer container = null;
+		try {
+			container = new AppGameContainer(new Game(), 640, 480, false);
+		} catch (SlickException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    		try {
+				container.start();
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			};break;
+			//new Jeu(nomJeu);break;
 		case 1 : new UneImage(nomJeu + ": exemple d'images");break;
 		case 2 : new Option(nomJeu + ": gestion des options");break;
 		case 3 : new Fichier(nomJeu + ": pour écrire dans un fichier");break;
