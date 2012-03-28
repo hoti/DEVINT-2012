@@ -1,9 +1,7 @@
 package slick;
 
 
-
-import java.util.Iterator;
-
+/*
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -14,6 +12,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.Color;
+*/
+
+import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Polygon;
  
 public class Game extends BasicGame {
  
@@ -53,20 +55,20 @@ public class Game extends BasicGame {
 					if(o1.getPolygon().getCenterY()<joueur.getPlayerPolygon().getCenterY()){
 						joueur.changePlayerY(o1.getPolygon().getMaxY());
 						
-					}else joueur.changePlayerY(o1.getPolygon().getMinY());
+					} else joueur.changePlayerY(o1.getPolygon().getMinY());
 				}
-			}else if(o.getClass()==PlateformMvt.class){
+			} else if(o.getClass()==PlateformMvt.class){
 				PlateformMvt o2=(PlateformMvt)o;
 				if(o2.getPolygon().intersects(joueur.getPlayerPolygon())){
 					joueur.activeGravity();
 					if(o2.getDir().equals(Direction.X)){
 						if(o2.getSens()){
 							joueur.setPlayerX(1);
-						}else joueur.setPlayerX(-1);
-					}else{
+						} else joueur.setPlayerX(-1);
+					} else{
 						if(o2.getSens()){
 							joueur.setPlayerY(1);
-						}else joueur.setPlayerY(-1);
+						} else joueur.setPlayerY(-1);
 					}
 				}
 				joueur.setPlayerY(1);
@@ -150,13 +152,10 @@ public class Game extends BasicGame {
 				return true;
 			}
 		}
-		
 		return false;
 	}
 	
-
- 
-	public void render(GameContainer container, Graphics g)  {
+ 	public void render(GameContainer container, Graphics g)  {
 		BlockMap.tmap.render(0,0);
 		joueur.drawPlayer(g);
 
@@ -167,10 +166,6 @@ public class Game extends BasicGame {
 			// Obstacle o=(Obstacle)itr.next();
 			o.drawObstacle(g);
 		}
-		
-
-		
- 
 	}
  
 	public void launch() throws SlickException{

@@ -12,27 +12,26 @@ import devintAPI.MenuAbstrait;
 
 public class MenuNiveau extends MenuAbstrait {
 
-    String file;
+    private static final long serialVersionUID = 953412138516837540L;
+	String file;
     String file2 = ".." + File.separator + "ressources" + File.separator
             + "niveauChoisi.txt";
 
     private int dernierNiveauAtteint;
 
     /**
-     * constructeur
-     * 
-     * @param title
-     *            : le nom du jeu
+     * Constructeur
+     * @param title: le nom du jeu
      */
     public MenuNiveau() {
         super("Choix du niveau");
         try {
-            BufferedReader l = new BufferedReader(new FileReader(file2));
-            String line = l.readLine();
+            BufferedReader br = new BufferedReader(new FileReader(file2));
+            String line = br.readLine();
 
             optionCourante = Integer.valueOf(line);
             setFocusedButton(optionCourante);
-            l.close();
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,8 +56,8 @@ public class MenuNiveau extends MenuAbstrait {
         
         String[] noms = new String[this.dernierNiveauAtteint + 2];
         for (int i = 0; i < this.dernierNiveauAtteint + 1; i++) {
-            int j = i + 1;
-            noms[i] = "Niveau " + j;
+            // int j = i + 1;
+            noms[i] = "Niveau " + (i+1);
         }
         noms[this.dernierNiveauAtteint + 1] = "Retour";
         return noms;

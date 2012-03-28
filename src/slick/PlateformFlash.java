@@ -9,11 +9,9 @@ public class PlateformFlash extends Obstacle {
 	private boolean visible;
 	private int frequence;
 
-	
 	private int width;
 	private int height;
 
-	
 	public PlateformFlash(float posX, float posY,int frequence,int width,int height,boolean visible){
 		super(posX,posY,false);
 		
@@ -29,7 +27,6 @@ public class PlateformFlash extends Obstacle {
 	public boolean isVisible(){
 		return visible;
 	}
-	
 	
 	public void drawObstacle(Graphics g){
 		if(visible){
@@ -49,9 +46,11 @@ public class PlateformFlash extends Obstacle {
 	}
 	
 	private void changeVisible(){
+		/*
 		if(visible){
 			visible=false;
-		}else visible=true;
+		}else visible=true;*/
+		visible = !visible;
 	}
 	
 
