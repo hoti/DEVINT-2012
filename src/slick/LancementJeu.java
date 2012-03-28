@@ -1,7 +1,7 @@
 package slick;
 
 /** classe pour lancer le jeu
- * Elle cr�� simplement une instance de MenuJeu
+ * Elle cree simplement une instance de MenuJeu
  * 
  * @author helene
  *

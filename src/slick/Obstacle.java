@@ -22,12 +22,14 @@ public abstract class Obstacle {
 	public void drawObstacle(Graphics g){
 		
 	}
+	
 	public void act(int step){};
 	
 
 	public Polygon getPolygon(){
 		return polygonObstacle;
 	}
+	
 	public boolean getDanger(){
 		return danger;
 	}
@@ -36,6 +38,7 @@ public abstract class Obstacle {
 		posX+=X;
 		polygonObstacle.setX(posX);
 	}
+	
 	public void setPosY(float Y){
 		posY+=Y;
 		polygonObstacle.setY(posY);

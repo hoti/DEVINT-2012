@@ -33,9 +33,7 @@ public class PlateformMvt extends Obstacle {
 		return dir;
 	}
 	public boolean getSens(){
-		if(vitesseDeplacement>0){
-			return true;
-		}else return false;
+		return vitesseDeplacement>0;
 	}
 	
 	public void drawObstacle(Graphics g){
@@ -55,12 +53,9 @@ public class PlateformMvt extends Obstacle {
 	}
 	
 	public void move(){
-		switch (dir) 
-		{ 
-		case Y: setPosY(vitesseDeplacement);
-			break; 
-		case X: setPosX(vitesseDeplacement);
-			break;
+		switch (dir) { 
+			case Y: setPosY(vitesseDeplacement); break; 
+			case X: setPosX(vitesseDeplacement); break;
 		}
 	}
 	

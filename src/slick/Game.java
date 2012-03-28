@@ -20,12 +20,6 @@ public class Game extends BasicGame {
 
 	private Stickman joueur;
 	private Playground map;	
-	
-	
-
-
-
-
 	private int step;
 	
 	public Game() {
@@ -50,9 +44,7 @@ public class Game extends BasicGame {
 		step++;
 
 		
-		Iterator itr=map.getListeObstacles().iterator();
-		while(itr.hasNext()){
-			Obstacle o=(Obstacle)itr.next();
+		for(Obstacle o : map.getListeObstacles()){
 			o.act(step);
 			if(o.getClass()==PlateformFlash.class){
 				PlateformFlash o1=(PlateformFlash)o;
@@ -146,9 +138,9 @@ public class Game extends BasicGame {
 				return true;
 			}    
 		}
-		Iterator itr=map.getListeObstacles().iterator();
-		while(itr.hasNext()){
-			Obstacle o=(Obstacle)itr.next();
+		//Iterator itr=map.getListeObstacles().iterator();
+		for(Obstacle o : map.getListeObstacles()){
+			// Obstacle o=(Obstacle)itr.next();
 			if(o.getClass()==PlateformFlash.class){
 				PlateformFlash o1=(PlateformFlash)o;
 				if(o1.isVisible() && o1.getPolygon().intersects(playerPoly)){
@@ -170,9 +162,9 @@ public class Game extends BasicGame {
 
 		g.setColor(Color.black);
 		g.setBackground(Color.white);
-		Iterator itr=map.getListeObstacles().iterator();
-		while(itr.hasNext()){
-			Obstacle o=(Obstacle)itr.next();
+		// Iterator itr=map.getListeObstacles().iterator();
+		for(Obstacle o : map.getListeObstacles()){
+			// Obstacle o=(Obstacle)itr.next();
 			o.drawObstacle(g);
 		}
 		

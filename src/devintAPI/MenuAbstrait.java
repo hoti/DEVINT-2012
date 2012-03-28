@@ -38,6 +38,9 @@ public abstract class MenuAbstrait extends DevintFrameListener implements
 	// -------------------------------------------------------
 	// les attributs
 
+	
+	private static final long serialVersionUID = 5019181205064752768L;
+
 	// le nom du jeu
 	protected final String nomJeu;
 
@@ -97,10 +100,10 @@ public abstract class MenuAbstrait extends DevintFrameListener implements
 		super(title);
 		nomJeu = title;
 		optionCourante = -1;
-		// m�thode � rendre concr�te par h�ritage
+		// methode a rendre concr�te par h�ritage
 		nomOptions = nomOptions(); 
 		nbOption = nomOptions.length;
-		// on r�cup�re les pr�f�rences
+		// on recupere les preferences
 		Preferences pref = Preferences.getData();
 		foregroundColor = pref.getCurrentForegroundColor();
 		backgroundColor = pref.getCurrentBackgroundColor();
