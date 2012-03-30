@@ -16,7 +16,6 @@ public class Playground {
 	private ArrayList<Obstacle> listeObstacles;
 
 	
-	
 	public Playground(BlockMap map,int posXStart, int posYStart, int posXFinish, int posYFinish){
 		
 		this.map=map;

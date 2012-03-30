@@ -6,8 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.newdawn.slick.SlickException;
-
 import devintAPI.MenuAbstrait;
 
 public class MenuNiveau extends MenuAbstrait {
@@ -38,17 +36,17 @@ public class MenuNiveau extends MenuAbstrait {
     }
 
     /**
-     * renvoie le nom des options du menu vous pouvez dï¿½finir autant d'options
+     * renvoie le nom des options du menu vous pouvez définir autant d'options
      * que vous voulez
      **/
     protected String[] nomOptions() {
         file = ".." + File.separator + "ressources" + File.separator
                 + "dernierNiveau.txt";
         try {
-            BufferedReader l = new BufferedReader(new FileReader(file));
-            String line = l.readLine();
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line = br.readLine();
             dernierNiveauAtteint=Integer.valueOf(line);
-            l.close();
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

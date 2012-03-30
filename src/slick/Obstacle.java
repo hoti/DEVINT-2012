@@ -23,7 +23,7 @@ public abstract class Obstacle {
 		
 	}
 	
-	public void act(int step){};
+	public abstract void act(int step);
 	
 
 	public Polygon getPolygon(){
