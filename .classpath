@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/user/Documents/Cours/Projet_DEVINT/VocalyzeSIVOX/bin/SI_VOX.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Documents/SI3/S6/devin/VocalyzeSIVOX/bin/SI_VOX.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Projet_DEVINT/lib"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="devin/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/user/Documents/Cours/Projet_DEVINT/lib/slick.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Documents/SI3/S6/devin/lib/slick.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

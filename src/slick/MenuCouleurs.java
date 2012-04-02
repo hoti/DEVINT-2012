@@ -82,8 +82,9 @@ public class MenuCouleurs extends MenuAbstrait {
         }
     }
 
-    // renvoie le fichier wave contenant le message d'accueil
-    // ces fichiers doivent �tre plac�s dans ressources/sons/
+    /** renvoie le fichier wave contenant le message d'accueil
+    /* ces fichiers doivent �tre plac�s dans ressources/sons/
+     */
     protected String wavAccueil() {
         return "../ressources/sons/accueil.wav";
     }

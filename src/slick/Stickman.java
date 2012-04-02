@@ -23,10 +23,10 @@ public class Stickman {
 	private LastMouvement lastMouvement;
 	
 	private int step;
-	private static final int NBSTEPSAUT=40;
+	private static final int NB_STEP_SAUT=40;
 	
-	private static final int Width=20;
-	private static final int Heigth=30;
+	private static final int WIDTH = 20;
+	private static final int HEIGHT =30;
 	
 	
 	private static final String pathAnimGauche="../ressources/images/gif3W.png";
@@ -54,16 +54,16 @@ public class Stickman {
 	
 		playerPoly = new Polygon(new float[]{
 				playerX,playerY,
-				playerX+Width,playerY,
-				playerX+Width,playerY+Heigth,
-				playerX,playerY+Heigth
+				playerX+WIDTH,playerY,
+				playerX+WIDTH,playerY+HEIGHT,
+				playerX,playerY+HEIGHT
 		});
 		
-		sheet1 = new SpriteSheet(pathAnimArret,Width,Heigth);
-		sheet2 = new SpriteSheet(pathAnimSaut,Width,Heigth);
-		sheet3 = new SpriteSheet(pathAnimGauche,Width,Heigth);
-		sheet4 = new SpriteSheet(pathAnimDroite,Width,Heigth);
-		sheet5 = new SpriteSheet(pathAnimDead,Width,Heigth);
+		sheet1 = new SpriteSheet(pathAnimArret,WIDTH,HEIGHT);
+		sheet2 = new SpriteSheet(pathAnimSaut,WIDTH,HEIGHT);
+		sheet3 = new SpriteSheet(pathAnimGauche,WIDTH,HEIGHT);
+		sheet4 = new SpriteSheet(pathAnimDroite,WIDTH,HEIGHT);
+		sheet5 = new SpriteSheet(pathAnimDead,WIDTH,HEIGHT);
 		
 		playerAnim = new Animation();
 		playerAnim.setAutoUpdate(true);
@@ -167,15 +167,15 @@ public class Stickman {
 	public void Gravity(){
 		if(alive){
 			if(enableGravity){
-				if(step<(NBSTEPSAUT/2)){
+				if(step<(NB_STEP_SAUT/2)){
 					this.setPlayerY(-2);
 				}
-				else if(step<(NBSTEPSAUT-NBSTEPSAUT/6)){
+				else if(step<(NB_STEP_SAUT-NB_STEP_SAUT/6)){
 					this.setPlayerY(-1);
 				}
 				lastMouvement=LastMouvement.SAUT;
 				step++;
-				if(step>NBSTEPSAUT){
+				if(step>NB_STEP_SAUT){
 					activeGravity();
 					step=0;
 				}

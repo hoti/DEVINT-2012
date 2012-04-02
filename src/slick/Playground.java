@@ -31,7 +31,7 @@ public class Playground {
 		this.listeObstacles.add(new PlateformFlash(18,20,150,4,1,true));
 		this.listeObstacles.add(new PlateformFlash(24,13,150,4,1,true));
 		this.listeObstacles.add(new PlateformFlash(12,9,150,4,1,true));
-		
+		System.out.println(this.listeObstacles);
 	}
 	
 	

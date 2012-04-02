@@ -48,7 +48,8 @@ public class Game extends BasicGame {
 		
 		for(Obstacle o : map.getListeObstacles()){
 			o.act(step);
-			if(o.getClass()==PlateformFlash.class){
+			if(o instanceof PlateformFlash){
+				//System.out.println("Daniel Daniel Daniel");
 				PlateformFlash o1=(PlateformFlash)o;
 				if(o1.isVisible() && o1.getPolygon().intersects(joueur.getPlayerPolygon())){
 					joueur.activeGravity();
@@ -57,7 +58,9 @@ public class Game extends BasicGame {
 						
 					} else joueur.changePlayerY(o1.getPolygon().getMinY());
 				}
-			} else if(o.getClass()==PlateformMvt.class){
+			} else if(o instanceof PlateformMvt) {
+				
+			// } else if(o.getClass()==PlateformMvt.class){
 				PlateformMvt o2=(PlateformMvt)o;
 				if(o2.getPolygon().intersects(joueur.getPlayerPolygon())){
 					joueur.activeGravity();
@@ -143,7 +146,7 @@ public class Game extends BasicGame {
 		//Iterator itr=map.getListeObstacles().iterator();
 		for(Obstacle o : map.getListeObstacles()){
 			// Obstacle o=(Obstacle)itr.next();
-			if(o.getClass()==PlateformFlash.class){
+			if(o instanceof PlateformFlash){
 				PlateformFlash o1=(PlateformFlash)o;
 				if(o1.isVisible() && o1.getPolygon().intersects(playerPoly)){
 					return true;
