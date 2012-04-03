@@ -2,6 +2,7 @@ package slick;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Polygon;
 
 public class PlateformMvt extends Obstacle {
@@ -10,22 +11,17 @@ public class PlateformMvt extends Obstacle {
 	private int frequence;
 	private Direction dir; 
 	
-	private int width;
-	private int height;
+
 
 	
 	public PlateformMvt(float posX, float posY,int frequence,int width,int height, 
-			Direction dir,float vitesseDeplacement){
-		super(posX*16,posY*16,false);
+			Direction dir,float vitesseDeplacement,String pathObstacle,boolean danger) throws SlickException{
+		super(posX,posY,width,height,pathObstacle,danger);
 		
 		this.frequence=frequence;
 		this.dir=dir;
 		this.vitesseDeplacement=vitesseDeplacement;
 		
-		this.width=width;
-		this.height=height;
-		this.polygonObstacle=new Polygon(new float[]{posX*16,posY*16,(posX+this.width)*16,posY*16,
-				(posX+this.width)*16,(posY+this.height)*16,posX*16,(posY+this.height)*16});
 	}
 	
 	
@@ -36,14 +32,6 @@ public class PlateformMvt extends Obstacle {
 		if(vitesseDeplacement>0){
 			return true;
 		}else return false;
-	}
-	
-	public void drawObstacle(Graphics g){
-		Color c=g.getColor();
-		g.setColor(Color.green);
-		g.fill(polygonObstacle);
-		g.setColor(c);
-		
 	}
 	
 	public void act(int step){

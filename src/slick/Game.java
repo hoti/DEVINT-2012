@@ -2,6 +2,7 @@ package slick;
 
 
 
+
 import java.util.Iterator;
 
 import org.newdawn.slick.Animation;
@@ -11,6 +12,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.Color;
@@ -20,8 +22,7 @@ public class Game extends BasicGame {
 
 	private Stickman joueur;
 	private Playground map;	
-	
-	
+
 
 
 
@@ -35,13 +36,13 @@ public class Game extends BasicGame {
 	public void init(GameContainer container) throws SlickException {
 	
 		container.setVSync(true);
-		container.setMaximumLogicUpdateInterval(15);
-		container.setMinimumLogicUpdateInterval(15);
-		container.setFullscreen(true);
+		container.setMaximumLogicUpdateInterval(20);
+		container.setMinimumLogicUpdateInterval(21);
+		container.setShowFPS(false);
+		//container.setFullscreen(true);
 		map = new Playground(new BlockMap("../ressources/images/map2.tmx"),0,0,0,0);
 		
-	
-
+		
 		joueur=new Stickman(340,240);
 		step=0;
 	}
@@ -49,47 +50,15 @@ public class Game extends BasicGame {
 	public void update(GameContainer container, int delta) throws SlickException {
 		step++;
 
-		
-		Iterator itr=map.getListeObstacles().iterator();
+
+		Iterator<Obstacle> itr=map.getListeObstacles().iterator();
 		while(itr.hasNext()){
 			Obstacle o=(Obstacle)itr.next();
 			o.act(step);
 			if(o.getClass()==PlateformFlash.class){
-				PlateformFlash o1=(PlateformFlash)o;
-				if(o1.isVisible() && o1.getPolygon().intersects(joueur.getPlayerPolygon())){
-					joueur.activeGravity();
-					if(o1.getPolygon().getCenterY()<joueur.getPlayerPolygon().getCenterY()){
-						joueur.changePlayerY(o1.getPolygon().getMaxY());
-						
-					}else joueur.changePlayerY(o1.getPolygon().getMinY());
-				}
+				FlashCollision((PlateformFlash)o);
 			}else if(o.getClass()==PlateformMvt.class){
-				PlateformMvt o2=(PlateformMvt)o;
-				if(o2.getPolygon().intersects(joueur.getPlayerPolygon())){
-					joueur.activeGravity();
-					if(o2.getDir().equals(Direction.X)){
-						if(o2.getSens()){
-							joueur.setPlayerX(1);
-						}else joueur.setPlayerX(-1);
-					}else{
-						if(o2.getSens()){
-							joueur.setPlayerY(1);
-						}else joueur.setPlayerY(-1);
-					}
-				}
-				joueur.setPlayerY(1);
-				if(o2.getPolygon().intersects(joueur.getPlayerPolygon())){
-					if(o2.getDir().equals(Direction.X)){
-						if(o2.getSens()){
-							joueur.setPlayerX(1);
-						}else joueur.setPlayerX(-1);
-					}else{
-						if(o2.getSens()){
-							joueur.setPlayerY(1);
-						}else joueur.setPlayerY(-1);
-					}
-				}
-				joueur.setPlayerY(-1);
+				MvtCollision((PlateformMvt)o);
 			}
 		}
 	
@@ -119,17 +88,28 @@ public class Game extends BasicGame {
 
 		if (container.getInput().isKeyPressed(Input.KEY_UP)){
 			joueur.saut();
+			
 		}
 		
 		joueur.Gravity();
 		if (entityCollisionWith()){
 			joueur.cancelLastMouvement();
+			
 		}else joueur.activeSaut();
+		
+		joueur.collisionSound();
+		this.Stuck();
+		
 
 
 	
 		if (container.getInput().isKeyDown(Input.KEY_ESCAPE)){
 			container.setFullscreen(false);
+		}
+		if (container.getInput().isKeyDown(Input.KEY_R)){
+			joueur.setAlive();
+			joueur.changePlayerX(0);
+			joueur.changePlayerY(0);
 		}
 	}
 	
@@ -146,15 +126,21 @@ public class Game extends BasicGame {
 				return true;
 			}    
 		}
-		Iterator itr=map.getListeObstacles().iterator();
+		Iterator<Obstacle> itr=map.getListeObstacles().iterator();
 		while(itr.hasNext()){
 			Obstacle o=(Obstacle)itr.next();
 			if(o.getClass()==PlateformFlash.class){
-				PlateformFlash o1=(PlateformFlash)o;
-				if(o1.isVisible() && o1.getPolygon().intersects(playerPoly)){
+				PlateformFlash plateform=(PlateformFlash)o;
+				if(plateform.isVisible() && plateform.getPolygon().intersects(playerPoly)){
+					if(plateform.getDanger()){
+						joueur.setDead();
+					}
 					return true;
 				}
 			}else if(o.getPolygon().intersects(playerPoly)){
+				if(o.getDanger()){
+					joueur.setDead();
+				}
 				return true;
 			}
 		}
@@ -162,22 +148,92 @@ public class Game extends BasicGame {
 		return false;
 	}
 	
+	public void FlashCollision(PlateformFlash plateform) throws SlickException{
 
+		if(plateform.isVisible() && plateform.getPolygon().intersects(joueur.getPlayerPolygon())){
+			joueur.activeGravity();
+			if(plateform.getDanger()){
+				joueur.setDead();
+			}else if(plateform.getPolygon().getCenterY()<joueur.getPlayerPolygon().getCenterY()){
+				joueur.changePlayerY(plateform.getPolygon().getMinY()-joueur.getPlayerPolygon().getHeight()-1);
+			}else joueur.changePlayerY(plateform.getPolygon().getMaxY());
+		}
+		this.Stuck();
+	}
+	
+	public void MvtCollision(PlateformMvt plateform) throws SlickException{
+
+		if(plateform.getPolygon().intersects(joueur.getPlayerPolygon())){
+			if(plateform.getDanger()){
+				joueur.setDead();
+			}else{
+				this.Stuck();
+				joueur.activeGravity();
+				if(joueur.getAlive()){
+					if(plateform.getDir().equals(Direction.X)){
+						if(plateform.getSens()){
+							joueur.setPlayerX(1);
+						}else joueur.setPlayerX(-1);
+				}else{
+					if(plateform.getSens()){
+						joueur.setPlayerY(1);
+					}else joueur.setPlayerY(-1);
+				}
+			}
+		}
+	}
+		
+		joueur.setPlayerY(1);
+		if(plateform.getPolygon().intersects(joueur.getPlayerPolygon())&& joueur.getAlive()){
+			if(plateform.getDanger()){
+				joueur.setDead();
+			}
+			else if(plateform.getDir().equals(Direction.X)){
+				if(plateform.getSens()){
+					joueur.setPlayerX(1);
+				}else joueur.setPlayerX(-1);
+			}else{
+				if(plateform.getSens()){
+					joueur.setPlayerY(1);
+				}else joueur.setPlayerY(-1);
+			}
+		}
+		joueur.setPlayerY(-1);
+		
+	}
+	
+	public void Stuck() throws SlickException{
+		joueur.setPlayerX(-1);
+		if(entityCollisionWith()){
+			joueur.setPlayerX(+2);
+			if(entityCollisionWith()){
+				joueur.setPlayerX(-1);
+				joueur.setPlayerY(+1);
+				if(entityCollisionWith()){
+					joueur.setPlayerY(-2);
+					if(entityCollisionWith()){
+						joueur.setDead();
+					}
+					joueur.setPlayerY(+1);
+				}else joueur.setPlayerY(-1);
+			}else joueur.setPlayerX(-1);
+		}else joueur.setPlayerX(+1);
+		
+
+	}
  
 	public void render(GameContainer container, Graphics g)  {
+		
 		BlockMap.tmap.render(0,0);
 		joueur.drawPlayer(g);
 
 		g.setColor(Color.black);
 		g.setBackground(Color.white);
-		Iterator itr=map.getListeObstacles().iterator();
+		Iterator<Obstacle> itr=map.getListeObstacles().iterator();
 		while(itr.hasNext()){
 			Obstacle o=(Obstacle)itr.next();
 			o.drawObstacle(g);
-		}
-		
-
-		
+		}		
  
 	}
  

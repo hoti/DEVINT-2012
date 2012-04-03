@@ -3,6 +3,7 @@ package slick;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Polygon;
 
@@ -20,10 +21,13 @@ public class Stickman {
 	private boolean DROITE;
 	private boolean enableGravity;
 	
+	private boolean collisionLastStep;
+	private boolean collision;
+	
 	private LastMouvement lastMouvement;
 	
 	private int step;
-	private static final int NBSTEPSAUT=40;
+	private static final int NBSTEPSAUT=45;
 	
 	private static final int Width=20;
 	private static final int Heigth=30;
@@ -42,6 +46,10 @@ public class Stickman {
 	private SpriteSheet sheet4;
 	private SpriteSheet sheet5;
 	
+	private Sound fx;
+	private Sound collisionSound;
+	private Sound gameOver;
+	private Sound start;
 	
 	/*Constructeur 
 	 * 
@@ -75,7 +83,15 @@ public class Stickman {
 		GAUCHE=false;
 		DROITE=false;
 		enableGravity=false;
+		collisionLastStep=false;
+		collision=false;
 		step=0;
+		
+		fx = new Sound("../ressources/sons/3.wav");
+		collisionSound = new Sound("../ressources/sons/collision.wav");
+		gameOver=new Sound("../ressources/sons/dead.wav");
+		start=new Sound("../ressources/sons/start.wav");
+		start.play();
 		
 	}
 	
@@ -97,10 +113,18 @@ public class Stickman {
 		SAUT=true;
 	}
 	
-	public void changeAlive(){
+	public void setDead(){
 		if(alive){
 			alive=false;
-		}else alive=true;
+			this.setAnimDead();
+			gameOver.play();
+		}
+	}
+	
+	public void setAlive(){
+		alive=true;
+		this.setAnimArret();
+		start.play();		
 	}
 	
 	public void changePlayerX(float X){
@@ -156,6 +180,7 @@ public class Stickman {
 		if(alive){
 			if(!SAUT){
 				enableGravity=true;
+				fx.play();
 			}
 			SAUT=true;
 		}
@@ -202,6 +227,7 @@ public class Stickman {
 					activeGravity();
 					step=0;
 				}else this.setPlayerX(1);
+				this.collision();
 				break; 
 			case DROITE:
 				if(this.SAUT){
@@ -209,11 +235,13 @@ public class Stickman {
 					activeGravity();
 					step=0;
 				}else this.setPlayerX(-1);
+				this.collision();
 				break;
 			case SAUT:
 				this.setPlayerY(2);
 				activeGravity();
 				step=0;
+				this.collision();
 				break;
 			case CHUTE:
 				this.setPlayerY(-2);
@@ -226,6 +254,7 @@ public class Stickman {
 				}
 				break;
 			}
+			
 		}
 
 	}
@@ -237,6 +266,18 @@ public class Stickman {
 	public void enableDroite(){
 		DROITE=false;
 	}
+	
+	public void collision(){
+		collision=true;
+	}
+	public void collisionSound(){
+		if(collision && !collisionLastStep){
+			collisionSound.play();
+		}
+		collisionLastStep=collision;
+		collision=false;
+	}
+	
 	
 	public void setAnimArret(){
 		// Mise en place l'animation représentant stickman

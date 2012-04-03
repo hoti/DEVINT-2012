@@ -16,7 +16,7 @@
    <property name="collision" value=""/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3SMQoAIAwDQP3/p52cVahYyx1kL01aA6a+CDFe/VWftd3q125y0EMNetzjT0SyJyJl39Nv98lZBpZk4KLAEgAA
+   H4sIAAAAAAAAC+3TMQoAIAwDwPr/Tzs5q5ChhTvIXkJaBRzrEjL0yiT2Cjn+6Y2eSLInkrrvadp98pcNxZbrOcASAAA=
   </data>
  </layer>
  <layer name="tiles" width="40" height="30" visible="0">
