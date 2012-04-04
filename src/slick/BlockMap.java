@@ -5,12 +5,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
  
 public class BlockMap {
-
-	public static TiledMap tmap;
+	public  TiledMap tmap;
 	public static int mapWidth;
 	public static int mapHeight;
 	private int square[] = {1,1,15,1,15,15,1,15}; //square shaped tile
-	public static ArrayList<Object> entities;
+	public ArrayList<Object> entities;
  
 	public BlockMap(String ref) throws SlickException {
 		entities = new ArrayList<Object>();
@@ -27,5 +26,4 @@ public class BlockMap {
 			}
 		}
 	}
-
 }

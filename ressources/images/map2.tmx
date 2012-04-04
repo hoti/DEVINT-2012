@@ -11,17 +11,20 @@
  <tileset firstgid="11" name="tiles" tilewidth="16" tileheight="16">
   <image source="tiles.png" width="128" height="64"/>
  </tileset>
+ <tileset firstgid="43" name="porte" tilewidth="16" tileheight="16">
+  <image source="porte.png" width="32" height="32"/>
+ </tileset>
  <layer name="collision" width="40" height="30">
   <properties>
    <property name="collision" value=""/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3TMQoAIAwDwPr/Tzs5q5ChhTvIXkJaBRzrEjL0yiT2Cjn+6Y2eSLInkrrvadp98pcNxZbrOcASAAA=
+   H4sIAAAAAAAAC+3UwQkAIAwEQe2/abGAKKLJnbAD+e/n0pqvrg7YoA9q3eh+7AMQW+1HvefdvtU9mT/H/ae590303XnRl7mz001W/wH3vhfoA2IVe878G+obP+SExMASAAA=
   </data>
  </layer>
- <layer name="tiles" width="40" height="30" visible="0">
+ <layer name="tiles" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3DsQkAMAgAMA/Qrf7/qj5RcEggEQAAAAD8lIfXfof3HjfFx4fAEgAA
+   H4sIAAAAAAAAC+3OwQkAMAgAMfexdf/x6gT9ipDA/S8CAADYLLszPfFxu5qeAGC1B0+ZwbHAEgAA
   </data>
  </layer>
 </map>

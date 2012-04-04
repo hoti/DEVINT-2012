@@ -14,7 +14,7 @@ public class PlateformMvt extends Obstacle {
 
 
 	
-	public PlateformMvt(float posX, float posY,int frequence,int width,int height, 
+	public PlateformMvt(int posX, int posY,int frequence,int width,int height, 
 			Direction dir,float vitesseDeplacement,String pathObstacle,boolean danger) throws SlickException{
 		super(posX,posY,width,height,pathObstacle,danger);
 		
@@ -40,6 +40,10 @@ public class PlateformMvt extends Obstacle {
 			vitesseDeplacement=-vitesseDeplacement;
 		}
 		
+	}
+	
+	public float getVitesse(){
+		return vitesseDeplacement;
 	}
 	
 	public void move(){

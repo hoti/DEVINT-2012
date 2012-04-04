@@ -3,6 +3,7 @@ package slick;
 
 
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.newdawn.slick.Animation;
@@ -21,36 +22,68 @@ public class Game extends BasicGame {
  
 
 	private Stickman joueur;
-	private Playground map;	
-
-
-
-
-
+	private ArrayList<Playground> listMap;
+	private Playground map;
+	
 	private int step;
+	private int nbMap;
+	
+	private boolean begin;
 	
 	public Game() {
-		super("StickMan");
+		super("StickMan");	
+		begin=true;
 	}
  
 	public void init(GameContainer container) throws SlickException {
 	
+		if(begin){
+			nbMap=0;
+			listMap=new ArrayList<Playground>();
+			Playground map1 = new Playground(new BlockMap("../ressources/images/map1.tmx"),0,25,21,26);
+			Playground map2 = new Playground(new BlockMap("../ressources/images/map2.tmx"),0,3,37,18);
+		//	Playground map3 = new Playground(new BlockMap("ressources/images/map3.tmx"),0,0,37,2);
+			
+			map1.addObstacle(new PlateformMvt(27,20,135,4,1,Direction.Y,1,null,false));
+			
+			
+			map2.addObstacle(new Obstacle(39,3,1,10,"../ressources/images/piqueG.png",true));
+			map2.addObstacle(new Obstacle(22,17,1,5,"../ressources/images/piqueG.png",true));
+			map2.addObstacle(new Obstacle(22,28,3,1,"../ressources/images/pique.png",true));
+			map2.addObstacle(new PlateformFlash(28,12,150,4,1,"../ressources/images/pique.png",true,true));
+			map2.addObstacle(new PlateformFlash(19,12,150,4,1,"../ressources/images/pique.png",true,true));
+			map2.addObstacle(new PlateformFlash(10,12,150,4,1,"../ressources/images/pique.png",true,true));
+			map2.addObstacle(new PlateformFlash(3,13,300,4,2,null,false,true));
+			map2.addObstacle(new PlateformMvt(-8,25,90,24,3,Direction.X,1,null,false));
+			map2.addObstacle(new PlateformMvt(30,20,135,4,1,Direction.Y,1,null,false));
+			
+			listMap.add(map1);
+			listMap.add(map2);
+			begin=false;
+		}
+		
 		container.setVSync(true);
-		container.setMaximumLogicUpdateInterval(20);
-		container.setMinimumLogicUpdateInterval(21);
+		container.setMaximumLogicUpdateInterval(15);
+		container.setMinimumLogicUpdateInterval(15);
 		container.setShowFPS(false);
-		//container.setFullscreen(true);
-		map = new Playground(new BlockMap("../ressources/images/map2.tmx"),0,0,0,0);
 		
+		map=(Playground)listMap.get(nbMap);
 		
-		joueur=new Stickman(340,240);
+		joueur=new Stickman(map.getXStart(),map.getYStart());
 		step=0;
+		
 	}
  
 	public void update(GameContainer container, int delta) throws SlickException {
+		
+		if(map.endLevel(joueur.getPlayerPolygon())){
+			if(nbMap<1){
+				nbMap++;
+			}
+			this.init(container);
+		}
+		
 		step++;
-
-
 		Iterator<Obstacle> itr=map.getListeObstacles().iterator();
 		while(itr.hasNext()){
 			Obstacle o=(Obstacle)itr.next();
@@ -62,12 +95,7 @@ public class Game extends BasicGame {
 			}
 		}
 	
-		
-		
-
-
-		
-		
+			
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) {
 			joueur.moveGauche();
 			if (entityCollisionWith()){
@@ -94,32 +122,39 @@ public class Game extends BasicGame {
 		joueur.Gravity();
 		if (entityCollisionWith()){
 			joueur.cancelLastMouvement();
-			
+			joueur.setPlayerY(1);
+			if(entityCollisionWith()){
+				joueur.setPlayerY(-1);
+			}
 		}else joueur.activeSaut();
 		
 		joueur.collisionSound();
-		this.Stuck();
+		//this.Stuck();
 		
 
-
-	
-		if (container.getInput().isKeyDown(Input.KEY_ESCAPE)){
-			container.setFullscreen(false);
+		if (container.getInput().isKeyPressed(Input.KEY_F11)){
+			if(container.isFullscreen()){
+				container.setFullscreen(false);
+			}else container.setFullscreen(true);
+			
 		}
-		if (container.getInput().isKeyDown(Input.KEY_R)){
+		if (container.getInput().isKeyPressed(Input.KEY_R)){
+			//container.reinit();
 			joueur.setAlive();
-			joueur.changePlayerX(0);
-			joueur.changePlayerY(0);
+			joueur.changePlayerX(map.getXStart());
+			joueur.changePlayerY(map.getYStart());
 		}
 	}
+	
+	
 	
  
 	public boolean entityCollisionWith() throws SlickException {
 		
 		Polygon playerPoly=joueur.getPlayerPolygon();
 		
-		for (int i = 0; i < BlockMap.entities.size(); i++) {
-			Block entity1 = (Block) BlockMap.entities.get(i);
+		for (int i = 0; i < map.getMap().entities.size(); i++) {
+			Block entity1 = (Block) map.getMap().entities.get(i);
 			if (playerPoly.intersects(entity1.poly)|| playerPoly.getX() <0 ||
 					playerPoly.getMaxX() >BlockMap.mapWidth ||  playerPoly.getY() <0||
 					playerPoly.getMaxY() >BlockMap.mapHeight){
@@ -154,8 +189,8 @@ public class Game extends BasicGame {
 			joueur.activeGravity();
 			if(plateform.getDanger()){
 				joueur.setDead();
-			}else if(plateform.getPolygon().getCenterY()<joueur.getPlayerPolygon().getCenterY()){
-				joueur.changePlayerY(plateform.getPolygon().getMinY()-joueur.getPlayerPolygon().getHeight()-1);
+			}else if(plateform.getPolygon().getCenterY()>joueur.getPlayerPolygon().getCenterY()){
+				joueur.changePlayerY(plateform.getPolygon().getMinY()-joueur.getPlayerPolygon().getHeight());
 			}else joueur.changePlayerY(plateform.getPolygon().getMaxY());
 		}
 		this.Stuck();
@@ -168,16 +203,16 @@ public class Game extends BasicGame {
 				joueur.setDead();
 			}else{
 				this.Stuck();
-				joueur.activeGravity();
 				if(joueur.getAlive()){
+					joueur.activeGravity();
 					if(plateform.getDir().equals(Direction.X)){
-						if(plateform.getSens()){
-							joueur.setPlayerX(1);
-						}else joueur.setPlayerX(-1);
-				}else{
-					if(plateform.getSens()){
-						joueur.setPlayerY(1);
-					}else joueur.setPlayerY(-1);
+						//if(plateform.getSens()){
+							joueur.setPlayerX(plateform.getVitesse());
+						//}else joueur.setPlayerX(-1);
+					/*}else{
+						//if(plateform.getSens()){
+							joueur.setPlayerY(plateform.getVitesse());
+						//}else joueur.setPlayerY(-1);*/
 				}
 			}
 		}
@@ -185,61 +220,78 @@ public class Game extends BasicGame {
 		
 		joueur.setPlayerY(1);
 		if(plateform.getPolygon().intersects(joueur.getPlayerPolygon())&& joueur.getAlive()){
+			joueur.setPlayerY(-1);
 			if(plateform.getDanger()){
 				joueur.setDead();
 			}
 			else if(plateform.getDir().equals(Direction.X)){
 				if(plateform.getSens()){
 					joueur.setPlayerX(1);
-				}else joueur.setPlayerX(-1);
+					if(entityCollisionWith()){
+						joueur.setPlayerX(-1);
+					}
+				}else {
+					joueur.setPlayerX(-1);
+					if(entityCollisionWith()){
+						joueur.setPlayerX(1);
+					}
+				}
 			}else{
 				if(plateform.getSens()){
-					joueur.setPlayerY(1);
-				}else joueur.setPlayerY(-1);
+					joueur.setPlayerY(+1);
+					if(entityCollisionWith()){
+						joueur.setPlayerY(-1);
+					}
+				}else{
+					joueur.setPlayerY(-1);
+					if(entityCollisionWith()){
+						joueur.setPlayerY(1);
+					}
+				}
 			}
-		}
-		joueur.setPlayerY(-1);
+		}else joueur.setPlayerY(-1);
 		
 	}
 	
 	public void Stuck() throws SlickException{
-		joueur.setPlayerX(-1);
 		if(entityCollisionWith()){
-			joueur.setPlayerX(+2);
+			joueur.setPlayerX(-1);
 			if(entityCollisionWith()){
-				joueur.setPlayerX(-1);
-				joueur.setPlayerY(+1);
+				joueur.setPlayerX(+2);
 				if(entityCollisionWith()){
-					joueur.setPlayerY(-2);
-					if(entityCollisionWith()){
-						joueur.setDead();
-					}
+					joueur.setPlayerX(-1);
 					joueur.setPlayerY(+1);
-				}else joueur.setPlayerY(-1);
-			}else joueur.setPlayerX(-1);
-		}else joueur.setPlayerX(+1);
+					if(entityCollisionWith()){
+						joueur.setPlayerY(-2);
+						if(entityCollisionWith()){
+							joueur.setDead();
+						}
+						joueur.setPlayerY(+1);
+					}else joueur.setPlayerY(-1);
+				}else joueur.setPlayerX(-1);
+			}else joueur.setPlayerX(+1);
+		}
 		
 
 	}
  
 	public void render(GameContainer container, Graphics g)  {
 		
-		BlockMap.tmap.render(0,0);
+		map.getMap().tmap.render(0,0);
 		joueur.drawPlayer(g);
 
 		g.setColor(Color.black);
 		g.setBackground(Color.white);
-		Iterator<Obstacle> itr=map.getListeObstacles().iterator();
-		while(itr.hasNext()){
-			Obstacle o=(Obstacle)itr.next();
-			o.drawObstacle(g);
-		}		
+		map.draw(g);
+		
  
 	}
- 
+	
 	public void launch() throws SlickException{
 		AppGameContainer container = 
 			new AppGameContainer(new Game(), 640, 480, false);
 		container.start();
 	}
+ 
+
 }

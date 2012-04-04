@@ -50,6 +50,7 @@ public class Stickman {
 	private Sound collisionSound;
 	private Sound gameOver;
 	private Sound start;
+
 	
 	/*Constructeur 
 	 * 

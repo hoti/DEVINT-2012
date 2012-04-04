@@ -7,8 +7,8 @@ import org.newdawn.slick.geom.Polygon;
 
 public  class Obstacle {
 
-	protected float posX;
-	protected float posY;
+	protected int posX;
+	protected int posY;
 	
 
 	protected int width;
@@ -20,7 +20,7 @@ public  class Obstacle {
 	
 	protected boolean danger;
 	
-	public Obstacle(float posX, float posY,int width,int height,String pathObstacle,boolean danger) throws SlickException{
+	public Obstacle(int posX, int posY,int width,int height,String pathObstacle,boolean danger) throws SlickException{
 		this.posX=posX*16;
 		this.posY=posY*16;
 		this.danger=danger;

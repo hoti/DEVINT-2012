@@ -19,12 +19,12 @@
    <property name="collision" value=""/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OMQoAIAwEwfj/T1tZR6Mg6Axcm2wEAAAwtGS36Zv7q2+tR1+t59Sd1/qyO7/22d46QBUsZ8ASAAA=
+   H4sIAAAAAAAAC+3TMQoAIAwDwPr/Tzs5q5ChhTvIXkJaBRzrEjL0yiT2Cjn+6Y2eSLInkrrvadp98pcNxZbrOcASAAA=
   </data>
  </layer>
  <layer name="tiles" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OsQ0AIAgAQfZR3H88iQNYQnOXfP8RAAAAAP1WtacnPrI60xM8F1FX7UPAEgAA
+   H4sIAAAAAAAAC+3OsQ2AMAwAQQ8AXZgCkv3HiyegxBa6k77/CP7mzp7qiRczW9UTAAAA8KGjcWc2GndlG92U6r/AEgAA
   </data>
  </layer>
 </map>

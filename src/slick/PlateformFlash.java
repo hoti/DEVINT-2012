@@ -14,7 +14,7 @@ public class PlateformFlash extends Obstacle {
 
 
 	
-	public PlateformFlash(float posX, float posY,int frequence,int width,int height,String pathObstacle,
+	public PlateformFlash(int posX, int posY,int frequence,int width,int height,String pathObstacle,
 			boolean danger,boolean visible) throws SlickException{
 		
 		super(posX,posY,width,height,pathObstacle,danger);
