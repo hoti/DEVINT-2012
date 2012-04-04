@@ -33,6 +33,7 @@ public class Game extends BasicGame {
 	public Game() {
 		super("StickMan");	
 		begin=true;
+		
 	}
  
 	public void init(GameContainer container) throws SlickException {
@@ -41,31 +42,38 @@ public class Game extends BasicGame {
 			nbMap=0;
 			listMap=new ArrayList<Playground>();
 			Playground map1 = new Playground(new BlockMap("../ressources/images/map1.tmx"),0,25,21,26);
-			Playground map2 = new Playground(new BlockMap("../ressources/images/map2.tmx"),0,3,37,18);
-		//	Playground map3 = new Playground(new BlockMap("ressources/images/map3.tmx"),0,0,37,2);
+			Playground map2 = new Playground(new BlockMap("../ressources/images/map2.tmx"),0,25,1,3);
+			Playground map3 = new Playground(new BlockMap("../ressources/images/map3.tmx"),0,3,37,18);
 			
 			map1.addObstacle(new PlateformMvt(27,20,135,4,1,Direction.Y,1,null,false));
 			
 			
-			map2.addObstacle(new Obstacle(39,3,1,10,"../ressources/images/piqueG.png",true));
-			map2.addObstacle(new Obstacle(22,17,1,5,"../ressources/images/piqueG.png",true));
-			map2.addObstacle(new Obstacle(22,28,3,1,"../ressources/images/pique.png",true));
-			map2.addObstacle(new PlateformFlash(28,12,150,4,1,"../ressources/images/pique.png",true,true));
-			map2.addObstacle(new PlateformFlash(19,12,150,4,1,"../ressources/images/pique.png",true,true));
-			map2.addObstacle(new PlateformFlash(10,12,150,4,1,"../ressources/images/pique.png",true,true));
-			map2.addObstacle(new PlateformFlash(3,13,300,4,2,null,false,true));
-			map2.addObstacle(new PlateformMvt(-8,25,90,24,3,Direction.X,1,null,false));
-			map2.addObstacle(new PlateformMvt(30,20,135,4,1,Direction.Y,1,null,false));
+			map2.addObstacle(new PlateformMvt(15,20,64,4,1,Direction.X,1,null,false));
+			map2.addObstacle(new PlateformMvt(37,5,335,3,1,Direction.Y,1,null,false));
+			map2.addObstacle(new Obstacle(14,25,26,1,"../ressources/images/pique.png",true));
+			
+			
+			map3.addObstacle(new Obstacle(39,3,1,10,"../ressources/images/piqueG.png",true));
+			map3.addObstacle(new Obstacle(22,17,1,5,"../ressources/images/piqueG.png",true));
+			map3.addObstacle(new Obstacle(22,28,3,1,"../ressources/images/pique.png",true));
+			map3.addObstacle(new PlateformFlash(28,12,200,4,1,"../ressources/images/pique.png",true,true));
+			map3.addObstacle(new PlateformFlash(19,12,200,4,1,"../ressources/images/pique.png",true,true));
+			map3.addObstacle(new PlateformFlash(10,12,200,4,1,"../ressources/images/pique.png",true,true));
+			map3.addObstacle(new PlateformFlash(3,13,250,4,2,null,false,true));
+			map3.addObstacle(new PlateformMvt(-8,25,90,24,3,Direction.X,1,null,false));
+			map3.addObstacle(new PlateformMvt(30,20,135,4,1,Direction.Y,1,null,false));
 			
 			listMap.add(map1);
 			listMap.add(map2);
+			listMap.add(map3);
 			begin=false;
 		}
 		
 		container.setVSync(true);
-		container.setMaximumLogicUpdateInterval(15);
-		container.setMinimumLogicUpdateInterval(15);
+		container.setMaximumLogicUpdateInterval(22);
+		container.setMinimumLogicUpdateInterval(22);
 		container.setShowFPS(false);
+		container.setFullscreen(true);
 		
 		map=(Playground)listMap.get(nbMap);
 		
@@ -77,10 +85,19 @@ public class Game extends BasicGame {
 	public void update(GameContainer container, int delta) throws SlickException {
 		
 		if(map.endLevel(joueur.getPlayerPolygon())){
-			if(nbMap<1){
+			if(nbMap<2){
 				nbMap++;
+				this.init(container);
+			}else{ /*nbMap=0;begin=false;*/
+				joueur.changePlayerX(map.getXStart());
+				joueur.changePlayerY(map.getYStart());
 			}
-			this.init(container);
+			
+			/*joueur.setAlive();
+			map=(Playground)listMap.get(nbMap);
+			joueur.changePlayerX(map.getXStart());
+			joueur.changePlayerY(map.getYStart());
+			*/
 		}
 		
 		step++;
@@ -143,6 +160,10 @@ public class Game extends BasicGame {
 			joueur.setAlive();
 			joueur.changePlayerX(map.getXStart());
 			joueur.changePlayerY(map.getYStart());
+		}
+		
+		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)){
+			container.exit();
 		}
 	}
 	

@@ -25,7 +25,7 @@ public class MenuJeu extends MenuAbstrait {
      * vous pouvez d�finir autant d'options que vous voulez
      **/
 	protected String[] nomOptions() {
-		String[] noms = {"Jouer","Choix du niveau", "Niveau de difficulté", "Choix des couleurs", "Quitter"};
+		String[] noms = {"Jouer","Choix du niveau", "Niveau de difficulte", "Choix des couleurs", "Quitter"};
 		return noms;
 	}
 

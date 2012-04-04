@@ -1,5 +1,6 @@
 package slick;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -41,7 +42,7 @@ public  class Obstacle {
 		if(obstacle!=null){
 			for(int i=0;i<width/16;i++){
 				for(int j=0;j<height/16;j++){
-					obstacle.draw(posX+i*16, posY+j*16, 1.0f);
+					obstacle.draw(posX+i*16, posY+j*16, 1.0f);			
 				}
 			}	
 		}else{
