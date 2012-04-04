@@ -31,7 +31,7 @@ public class Game extends BasicGame {
 		container.setVSync(true);
 		container.setMaximumLogicUpdateInterval(15);
 		container.setMinimumLogicUpdateInterval(15);
-		container.setFullscreen(true);
+		//container.setFullscreen(true);
 		map = new Playground(new BlockMap("../ressources/images/map2.tmx"),0,0,0,0);
 		
 	
