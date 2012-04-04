@@ -9,7 +9,6 @@ public abstract class Obstacle {
 	protected float posY;
 	
 	protected Polygon polygonObstacle;
-
 	
 	protected boolean danger;
 	
@@ -19,27 +18,30 @@ public abstract class Obstacle {
 		this.danger=danger;
 	}
 	
-	public void drawObstacle(Graphics g){
-		
-	}
+	public abstract void drawObstacle(Graphics g);
 	
-	public void act(int step){};
+	public abstract void act(int step);
 	
-
-	public Polygon getPolygon(){
+/*
+	public Polygon getPolygon() {
 		return polygonObstacle;
 	}
+*/	
 	
-	public boolean getDanger(){
+	public Polygon getPolygon() {
+		return this.polygonObstacle;
+	}
+	
+	public boolean getDanger() {
 		return danger;
 	}
 	
-	public void setPosX(float X){
+	public void setPosX(float X) {
 		posX+=X;
 		polygonObstacle.setX(posX);
 	}
 	
-	public void setPosY(float Y){
+	public void setPosY(float Y) {
 		posY+=Y;
 		polygonObstacle.setY(posY);
 	}

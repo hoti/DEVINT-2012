@@ -12,23 +12,23 @@ import devintAPI.MenuAbstrait;
 
 public class MenuCouleurs extends MenuAbstrait {
 
-    String file = ".." + File.separator + "ressources" + File.separator
+    
+	private static final long serialVersionUID = -4950199227428042706L;
+	String file = ".." + File.separator + "ressources" + File.separator
             + "couleurs.txt";
 
     /**
      * constructeur
-     * 
-     * @param title
-     *            : le nom du jeu
+     * @param title : le nom du jeu
      */
     public MenuCouleurs() {
         super("Choix des couleurs");
         int couleur=1;
         try {
-            BufferedReader l = new BufferedReader(new FileReader(file));
-            String line = l.readLine();
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line = br.readLine();
             couleur=Integer.valueOf(line);
-            l.close();
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,8 +41,7 @@ public class MenuCouleurs extends MenuAbstrait {
      * que vous voulez
      **/
     protected String[] nomOptions() {
-        String[] noms = { "Fond Noir", "Fond Blanc", "Retour" };
-        return noms;
+        return new String[] { "Fond Noir", "Fond Blanc", "Retour" };
     }
 
     /**
@@ -83,8 +82,9 @@ public class MenuCouleurs extends MenuAbstrait {
         }
     }
 
-    // renvoie le fichier wave contenant le message d'accueil
-    // ces fichiers doivent �tre plac�s dans ressources/sons/
+    /** renvoie le fichier wave contenant le message d'accueil
+    /* ces fichiers doivent �tre plac�s dans ressources/sons/
+     */
     protected String wavAccueil() {
         return "../ressources/sons/accueil.wav";
     }

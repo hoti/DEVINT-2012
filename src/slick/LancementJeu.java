@@ -10,6 +10,7 @@ public class LancementJeu{
 
     public static void main(String args[]){
         new MenuJeu();
+        System.out.println("Lancement Jeu");
     }
 
 }

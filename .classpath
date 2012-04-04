@@ -1,3 +1,4 @@
+<<<<<<< .merge_file_ATUVt2
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
@@ -11,3 +12,18 @@
 	<classpathentry kind="lib" path="/home/hoti/java_wp/devint/lib/slick.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/user/Documents/SI3/S6/devin/VocalyzeSIVOX/bin/SI_VOX.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="devin/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/user/Documents/SI3/S6/devin/lib/slick.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
+>>>>>>> .merge_file_1DN4e4

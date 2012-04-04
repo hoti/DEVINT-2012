@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.newdawn.slick.SlickException;
 
 import devintAPI.MenuAbstrait;
 
@@ -25,10 +24,10 @@ public class MenuDifficulte extends MenuAbstrait {
         super("Choix de la difficulte");
         int difficulte=1;
         try {
-            BufferedReader l = new BufferedReader(new FileReader(file));
-            String line = l.readLine();
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line = br.readLine();
             difficulte=Integer.valueOf(line);
-            l.close();
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -93,13 +92,15 @@ public class MenuDifficulte extends MenuAbstrait {
         }
     }
 
-    // renvoie le fichier wave contenant le message d'accueil
-    // ces fichiers doivent etre places dans ressources/sons/
+    /** renvoie le fichier wave contenant le message d'accueil
+    /* ces fichiers doivent etre places dans ressources/sons/
+     */
     protected String wavAccueil() {
         return "../ressources/sons/accueil.wav";
     }
 
-    // renvoie le fichier wave contenant la regle du jeu
+    /** renvoie le fichier wave contenant la regle du jeu
+     */
     protected String wavRegleJeu() {
         return "../ressources/sons/accueil.wav";
     }
