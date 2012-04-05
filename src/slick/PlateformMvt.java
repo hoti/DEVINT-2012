@@ -8,8 +8,8 @@ import org.newdawn.slick.geom.Polygon;
 public class PlateformMvt extends Obstacle {
 
 	private float vitesseDeplacement;
-	private int frequence;
 	private Direction dir; 
+	private int frequence;
 	
 
 
@@ -19,27 +19,27 @@ public class PlateformMvt extends Obstacle {
 		super(posX,posY,width,height,pathObstacle,danger);
 		
 		this.frequence=frequence;
+
 		this.dir=dir;
 		this.vitesseDeplacement=vitesseDeplacement;
+		this.frequence = frequence;
 		
 	}
-	
 	
 	public Direction getDir(){
 		return dir;
 	}
+	
 	public boolean getSens(){
-		if(vitesseDeplacement>0){
-			return true;
-		}else return false;
+		return vitesseDeplacement > 0;
 	}
 	
+
 	public void act(int step){
 		this.move();
-		if(step%this.frequence==0){
-			vitesseDeplacement=-vitesseDeplacement;
+		if(step%this.frequence== 0){
+			vitesseDeplacement =- vitesseDeplacement;
 		}
-		
 	}
 	
 	public float getVitesse(){
@@ -47,13 +47,11 @@ public class PlateformMvt extends Obstacle {
 	}
 	
 	public void move(){
-		switch (dir) 
-		{ 
-		case Y: setPosY(vitesseDeplacement);
-			break; 
-		case X: setPosX(vitesseDeplacement);
-			break;
+		switch (dir) { 
+			case Y: setPosY(vitesseDeplacement); break; 
+			case X: setPosX(vitesseDeplacement); break;
 		}
 	}
+
 	
 }

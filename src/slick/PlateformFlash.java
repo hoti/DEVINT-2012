@@ -10,6 +10,7 @@ public class PlateformFlash extends Obstacle {
 	private boolean visible;
 	private int frequence;
 
+
 	
 
 
@@ -20,6 +21,7 @@ public class PlateformFlash extends Obstacle {
 		super(posX,posY,width,height,pathObstacle,danger);
 		this.visible=visible;
 		this.frequence=frequence;
+
 	}
 	
 	public boolean isVisible(){
@@ -31,13 +33,17 @@ public class PlateformFlash extends Obstacle {
 		if(step%this.frequence==0){
 			this.changeVisible();
 		}	
+
 	}
 	
 	private void changeVisible(){
+		/*
 		if(visible){
 			visible=false;
-		}else visible=true;
+		}else visible=true;*/
+		visible = !visible;
 	}
+
 	
 	public void drawObstacle(Graphics g){
 		if(visible){

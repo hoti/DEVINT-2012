@@ -14,6 +14,9 @@ import devintAPI.MenuAbstrait;
 
 public class MenuJeu extends MenuAbstrait {
 
+	
+	private static final long serialVersionUID = 4221219143089907105L;
+
 	/** constructeur
 	 * @param title : le nom du jeu 
 	 */
@@ -22,11 +25,13 @@ public class MenuJeu extends MenuAbstrait {
 	}
 
 	/** renvoie le nom des options du menu
-     * vous pouvez dï¿½finir autant d'options que vous voulez
+     * vous pouvez definir autant d'options que vous voulez
      **/
 	protected String[] nomOptions() {
+
 		String[] noms = {"Jouer","Choix du niveau", "Niveau de difficulte", "Choix des couleurs", "Quitter"};
 		return noms;
+
 	}
 
 	/** lance l'action associï¿½e au bouton nï¿½i
@@ -34,18 +39,17 @@ public class MenuJeu extends MenuAbstrait {
 	 */
 	protected void lancerOption(int i) {
 		switch (i){  
-		case 0 : 
-		    Game game = new Game();
-		    try {
-                        game.launch();
-                    } catch (SlickException e) {}
-		    
-		    ;break;
-		case 1 : this.setVisible(false); new MenuNiveau(); break;
-		case 2 : this.setVisible(false); new MenuDifficulte(); break;
-		case 3 : this.setVisible(false); new MenuCouleurs(); break;
-		case 4 : System.exit(0); break;
-		default: System.err.println("action non dï¿½finie");
+			case 0 : 
+				try {
+					new Game().launch();
+				} catch (SlickException e) {}
+		    	
+				break;
+			case 1 : this.setVisible(false); new MenuNiveau(); break;
+			case 2 : this.setVisible(false); new MenuDifficulte(); break;
+			case 3 : this.setVisible(false); new MenuCouleurs(); break;
+			case 4 : System.exit(0); break;
+			default: System.err.println("action non définie");
 		}
 	} 
 

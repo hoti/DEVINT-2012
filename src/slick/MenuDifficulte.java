@@ -6,29 +6,28 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.newdawn.slick.SlickException;
 
 import devintAPI.MenuAbstrait;
 
 public class MenuDifficulte extends MenuAbstrait {
 
-    String file = ".." + File.separator + "ressources" + File.separator
+    
+	private static final long serialVersionUID = 177608830448719527L;
+	String file = ".." + File.separator + "ressources" + File.separator
             + "difficulte.txt";
 
     /**
      * constructeur
-     * 
-     * @param title
-     *            : le nom du jeu
+     * @param title: le nom du jeu
      */
     public MenuDifficulte() {
-        super("Choix de la difficulté");
+        super("Choix de la difficulte");
         int difficulte=1;
         try {
-            BufferedReader l = new BufferedReader(new FileReader(file));
-            String line = l.readLine();
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line = br.readLine();
             difficulte=Integer.valueOf(line);
-            l.close();
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,12 +40,11 @@ public class MenuDifficulte extends MenuAbstrait {
      * que vous voulez
      **/
     protected String[] nomOptions() {
-        String[] noms = { "Facile", "Moyen", "Difficile", "Retour" };
-        return noms;
+        return new String[] { "Facile", "Moyen", "Difficile", "Retour" };
     }
 
     /**
-     * lance l'action associ�e au bouton n�i la num�rotation est celle du
+     * lance l'action associee au bouton n�i la num�rotation est celle du
      * tableau renvoy� par nomOption
      */
     protected void lancerOption(int i) {
@@ -90,17 +88,19 @@ public class MenuDifficulte extends MenuAbstrait {
             new MenuJeu();
             break;
         default:
-            System.err.println("action non d�finie");
+            System.err.println("action non definie");
         }
     }
 
-    // renvoie le fichier wave contenant le message d'accueil
-    // ces fichiers doivent �tre plac�s dans ressources/sons/
+    /** renvoie le fichier wave contenant le message d'accueil
+    /* ces fichiers doivent etre places dans ressources/sons/
+     */
     protected String wavAccueil() {
         return "../ressources/sons/accueil.wav";
     }
 
-    // renvoie le fichier wave contenant la r�gle du jeu
+    /** renvoie le fichier wave contenant la regle du jeu
+     */
     protected String wavRegleJeu() {
         return "../ressources/sons/accueil.wav";
     }

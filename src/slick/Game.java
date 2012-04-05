@@ -3,8 +3,10 @@ package slick;
 
 
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
+
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
@@ -17,14 +19,20 @@ import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.Color;
+
+
+import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Polygon;
  
 public class Game extends BasicGame {
  
 
 	private Stickman joueur;
+
 	private ArrayList<Playground> listMap;
 	private Playground map;
 	
+
 	private int step;
 	private int nbMap;
 	
@@ -74,6 +82,7 @@ public class Game extends BasicGame {
 		container.setMinimumLogicUpdateInterval(22);
 		container.setShowFPS(false);
 		container.setFullscreen(true);
+
 		
 		map=(Playground)listMap.get(nbMap);
 		
@@ -84,6 +93,7 @@ public class Game extends BasicGame {
  
 	public void update(GameContainer container, int delta) throws SlickException {
 		
+
 		if(map.endLevel(joueur.getPlayerPolygon())){
 			if(nbMap<2){
 				nbMap++;
@@ -109,6 +119,7 @@ public class Game extends BasicGame {
 				FlashCollision((PlateformFlash)o);
 			}else if(o.getClass()==PlateformMvt.class){
 				MvtCollision((PlateformMvt)o);
+
 			}
 		}
 	
@@ -182,6 +193,7 @@ public class Game extends BasicGame {
 				return true;
 			}    
 		}
+
 		Iterator<Obstacle> itr=map.getListeObstacles().iterator();
 		while(itr.hasNext()){
 			Obstacle o=(Obstacle)itr.next();
@@ -191,6 +203,7 @@ public class Game extends BasicGame {
 					if(plateform.getDanger()){
 						joueur.setDead();
 					}
+
 					return true;
 				}
 			}else if(o.getPolygon().intersects(playerPoly)){
@@ -200,10 +213,10 @@ public class Game extends BasicGame {
 				return true;
 			}
 		}
-		
 		return false;
 	}
 	
+
 	public void FlashCollision(PlateformFlash plateform) throws SlickException{
 
 		if(plateform.isVisible() && plateform.getPolygon().intersects(joueur.getPlayerPolygon())){
@@ -303,9 +316,9 @@ public class Game extends BasicGame {
 
 		g.setColor(Color.black);
 		g.setBackground(Color.white);
+
 		map.draw(g);
-		
- 
+
 	}
 	
 	public void launch() throws SlickException{

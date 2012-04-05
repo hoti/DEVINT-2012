@@ -27,10 +27,12 @@ public class Stickman {
 	private LastMouvement lastMouvement;
 	
 	private int step;
+
 	private static final int NBSTEPSAUT=45;
+
 	
-	private static final int Width=20;
-	private static final int Heigth=30;
+	private static final int WIDTH = 20;
+	private static final int HEIGHT =30;
 	
 	
 	private static final String pathAnimGauche="../ressources/images/gif3W.png";
@@ -52,8 +54,8 @@ public class Stickman {
 	private Sound start;
 
 	
-	/*Constructeur 
-	 * 
+	/**
+	 *Constructeur  
 	 */	
 	public Stickman(float playerX, float playerY) throws SlickException{
 		
@@ -63,16 +65,16 @@ public class Stickman {
 	
 		playerPoly = new Polygon(new float[]{
 				playerX,playerY,
-				playerX+Width,playerY,
-				playerX+Width,playerY+Heigth,
-				playerX,playerY+Heigth
+				playerX+WIDTH,playerY,
+				playerX+WIDTH,playerY+HEIGHT,
+				playerX,playerY+HEIGHT
 		});
 		
-		sheet1 = new SpriteSheet(pathAnimArret,Width,Heigth);
-		sheet2 = new SpriteSheet(pathAnimSaut,Width,Heigth);
-		sheet3 = new SpriteSheet(pathAnimGauche,Width,Heigth);
-		sheet4 = new SpriteSheet(pathAnimDroite,Width,Heigth);
-		sheet5 = new SpriteSheet(pathAnimDead,Width,Heigth);
+		sheet1 = new SpriteSheet(pathAnimArret,WIDTH,HEIGHT);
+		sheet2 = new SpriteSheet(pathAnimSaut,WIDTH,HEIGHT);
+		sheet3 = new SpriteSheet(pathAnimGauche,WIDTH,HEIGHT);
+		sheet4 = new SpriteSheet(pathAnimDroite,WIDTH,HEIGHT);
+		sheet5 = new SpriteSheet(pathAnimDead,WIDTH,HEIGHT);
 		
 		playerAnim = new Animation();
 		playerAnim.setAutoUpdate(true);
@@ -100,11 +102,11 @@ public class Stickman {
 	public Polygon getPlayerPolygon(){
 		return playerPoly;
 	}
+	
 	public boolean getAlive(){
 		return alive;
 	}
 	
-
 	public void activeGravity(){
 		enableGravity=false;	
 		step=0;
@@ -114,6 +116,7 @@ public class Stickman {
 		SAUT=true;
 	}
 	
+
 	public void setDead(){
 		if(alive){
 			alive=false;
@@ -126,6 +129,7 @@ public class Stickman {
 		alive=true;
 		this.setAnimArret();
 		start.play();		
+
 	}
 	
 	public void changePlayerX(float X){
@@ -151,13 +155,13 @@ public class Stickman {
 		if(alive){
 			if(SAUT){
 				this.setPlayerX((float)-1.5);
-			}else this.setPlayerX(-1);
+			} else this.setPlayerX(-1);
 			if(!SAUT){
 				if(!GAUCHE ){
 					setAnimGauche();
 				}
 			GAUCHE=true;
-			}else GAUCHE=false;
+			} else GAUCHE=false;
 			lastMouvement=LastMouvement.GAUCHE;
 		}
 	}
@@ -166,13 +170,13 @@ public class Stickman {
 		if(alive){
 			if(SAUT){
 				this.setPlayerX((float)1.5);
-			}else this.setPlayerX(1);
+			} else this.setPlayerX(1);
 			if(!SAUT){
 				if(!DROITE){
 					setAnimDroite();
 				}
 				DROITE=true;
-			}else DROITE=false;
+			} else DROITE=false;
 			lastMouvement=LastMouvement.DROITE;
 		}
 	}
@@ -203,7 +207,7 @@ public class Stickman {
 					activeGravity();
 					step=0;
 				}
-			}else {
+			} else {
 				this.setPlayerY(2);
 				lastMouvement=LastMouvement.CHUTE;
 			}
@@ -227,8 +231,10 @@ public class Stickman {
 					this.setPlayerX((float)1.5);
 					activeGravity();
 					step=0;
+
 				}else this.setPlayerX(1);
 				this.collision();
+
 				break; 
 			case DROITE:
 				if(this.SAUT){
@@ -237,6 +243,7 @@ public class Stickman {
 					step=0;
 				}else this.setPlayerX(-1);
 				this.collision();
+
 				break;
 			case SAUT:
 				this.setPlayerY(2);

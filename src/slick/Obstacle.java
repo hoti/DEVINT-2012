@@ -17,7 +17,6 @@ public  class Obstacle {
 	
 	protected Image obstacle;
 	protected Polygon polygonObstacle;
-
 	
 	protected boolean danger;
 	
@@ -38,6 +37,7 @@ public  class Obstacle {
 		
 	}
 	
+
 	public void drawObstacle(Graphics g){
 		if(obstacle!=null){
 			for(int i=0;i<width/16;i++){
@@ -50,20 +50,24 @@ public  class Obstacle {
 		}
 	}
 	public void act(int step){};
+
 	
 
-	public Polygon getPolygon(){
-		return polygonObstacle;
+	
+	public Polygon getPolygon() {
+		return this.polygonObstacle;
 	}
-	public boolean getDanger(){
+	
+	public boolean getDanger() {
 		return danger;
 	}
 	
-	public void setPosX(float X){
+	public void setPosX(float X) {
 		posX+=X;
 		polygonObstacle.setX(posX);
 	}
-	public void setPosY(float Y){
+	
+	public void setPosY(float Y) {
 		posY+=Y;
 		polygonObstacle.setY(posY);
 	}
