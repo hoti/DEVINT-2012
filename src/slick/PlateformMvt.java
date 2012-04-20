@@ -36,10 +36,10 @@ public class PlateformMvt extends Obstacle {
 	
 
 	public void act(int step){
-		this.move();
 		if(step%this.frequence== 0){
 			vitesseDeplacement =- vitesseDeplacement;
 		}
+		this.move();
 	}
 	
 	public float getVitesse(){

@@ -21,7 +21,7 @@ public class MenuJeu extends MenuAbstrait {
 	 * @param title : le nom du jeu 
 	 */
 	public MenuJeu() {
-		super("Menu de jeu");
+		super("STICKMAN");
 	}
 
 	/** renvoie le nom des options du menu

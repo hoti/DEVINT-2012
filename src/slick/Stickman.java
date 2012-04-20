@@ -7,47 +7,78 @@ import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Polygon;
 
+/** Classe représentant stickman, le personnage évoluant dans une niveau.
+ * Cette classe permet notamment de faire évoluer le personnage sur 2 axes (gestion des gifs inclus).
+ * 
+ * @author François
+ *
+ */
+
 public class Stickman {
 	
+	// Animation servant à gérer les gifs associés au personnage.
 	private Animation playerAnim;
+	
+	// Polygon servant à la gestion des obstacles avec stickman.
 	private Polygon playerPoly;
 	
+	//Position du joueur (correspondant aux coordonnées en haut à droite du polygon associé à ce dernier).
 	private float playerX;
 	private float playerY;
 	
+	
 	private boolean alive;
+	
+	// Boolean permettant de mettre en place les différentes animations
 	private boolean SAUT;
 	private boolean GAUCHE;
 	private boolean DROITE;
+	
+	// Boolean permettant d'activer le saut et inversement
 	private boolean enableGravity;
 	
+	// Boolean permettant de gérer le son associé à la collision.
 	private boolean collisionLastStep;
 	private boolean collision;
 	
+	
+	// Element de l'enum permettant de "sauver" le dernier mouvement effectuer afin de mieux le supprimer en cas de collision.
 	private LastMouvement lastMouvement;
 	
+	// Element permettant de compter le nombre de tour depuis le début d'un saut.
 	private int step;
 
+	
+	// Nombre de tour durant lesquels, la gravity sera désactiver pour effectuer un saut.
 	private static final int NBSTEPSAUT=45;
 
-	
+	// Taille de l'anime et du polygon associer à stickman (en pixel).
 	private static final int WIDTH = 20;
 	private static final int HEIGHT =30;
 	
-	
+	// Différent path pour les différentes animes.
 	private static final String pathAnimGauche="../ressources/images/gif3W.png";
 	private static final String pathAnimDroite="../ressources/images/gif4W.png";
 	private static final String pathAnimArret="../ressources/images/arretW.png";
 	private static final String pathAnimSaut="../ressources/images/tombeW.png";
 	private static final String pathAnimDead="../ressources/images/deadW.png";
-
 	
+	private static final String pathAnimGaucheD="../ressources/images/gif3.png";
+	private static final String pathAnimDroiteD="../ressources/images/gif4.png";
+	private static final String pathAnimArretD="../ressources/images/arret.png";
+	private static final String pathAnimSautD="../ressources/images/tombe.png";
+	private static final String pathAnimDeadD="../ressources/images/dead.png";
+
+
+	// Différent SpriteSheet servant pour les différentes animes.
 	private SpriteSheet sheet1;
 	private SpriteSheet sheet2;
 	private SpriteSheet sheet3;
 	private SpriteSheet sheet4;
 	private SpriteSheet sheet5;
 	
+	
+	// Différents sons associés aux mouvements
 	private Sound fx;
 	private Sound collisionSound;
 	private Sound gameOver;
@@ -55,9 +86,9 @@ public class Stickman {
 
 	
 	/**
-	 *Constructeur  
+	 *Constructeur  de base prenant en paramètre les positions du départ d'un niveau.
 	 */	
-	public Stickman(float playerX, float playerY) throws SlickException{
+	public Stickman(float playerX, float playerY,boolean darkBackground) throws SlickException{
 		
 		// Position de Stickman et création du polygone servant aux collisions
 		this.playerX=playerX;
@@ -70,11 +101,20 @@ public class Stickman {
 				playerX,playerY+HEIGHT
 		});
 		
-		sheet1 = new SpriteSheet(pathAnimArret,WIDTH,HEIGHT);
-		sheet2 = new SpriteSheet(pathAnimSaut,WIDTH,HEIGHT);
-		sheet3 = new SpriteSheet(pathAnimGauche,WIDTH,HEIGHT);
-		sheet4 = new SpriteSheet(pathAnimDroite,WIDTH,HEIGHT);
-		sheet5 = new SpriteSheet(pathAnimDead,WIDTH,HEIGHT);
+		if(!darkBackground){
+		//chargement des différentes animes.
+			sheet1 = new SpriteSheet(pathAnimArret,WIDTH,HEIGHT);
+			sheet2 = new SpriteSheet(pathAnimSaut,WIDTH,HEIGHT);
+			sheet3 = new SpriteSheet(pathAnimGauche,WIDTH,HEIGHT);
+			sheet4 = new SpriteSheet(pathAnimDroite,WIDTH,HEIGHT);
+			sheet5 = new SpriteSheet(pathAnimDead,WIDTH,HEIGHT);
+		}else {
+			sheet1 = new SpriteSheet(pathAnimArretD,WIDTH,HEIGHT);
+			sheet2 = new SpriteSheet(pathAnimSautD,WIDTH,HEIGHT);
+			sheet3 = new SpriteSheet(pathAnimGaucheD,WIDTH,HEIGHT);
+			sheet4 = new SpriteSheet(pathAnimDroiteD,WIDTH,HEIGHT);
+			sheet5 = new SpriteSheet(pathAnimDeadD,WIDTH,HEIGHT);
+		}
 		
 		playerAnim = new Animation();
 		playerAnim.setAutoUpdate(true);
@@ -90,6 +130,8 @@ public class Stickman {
 		collision=false;
 		step=0;
 		
+		
+		//chargement des différents sons.
 		fx = new Sound("../ressources/sons/3.wav");
 		collisionSound = new Sound("../ressources/sons/collision.wav");
 		gameOver=new Sound("../ressources/sons/dead.wav");
@@ -117,6 +159,7 @@ public class Stickman {
 	}
 	
 
+	
 	public void setDead(){
 		if(alive){
 			alive=false;
@@ -132,6 +175,8 @@ public class Stickman {
 
 	}
 	
+	
+	// Méthodes permettant de modifier la position du personnage en valeur absolue 
 	public void changePlayerX(float X){
 		playerX=X;
 		playerPoly.setX(playerX);
@@ -141,7 +186,7 @@ public class Stickman {
 		playerPoly.setY(playerY);
 	}
 	
-	
+	// Méthodes permettant de modifier la position du personnage en valeur relative
 	public void setPlayerX(float X){
 		playerX+=X;
 		playerPoly.setX(playerX);
@@ -150,7 +195,10 @@ public class Stickman {
 		playerY+=Y;
 		playerPoly.setY(playerY);
 	}
-		
+	
+	
+	
+	// Déplacement gauche et mise en place de l'anime gauche si ce mouvement n'était pas d'activer lors du dernier tour	
 	public void moveGauche(){
 		if(alive){
 			if(SAUT){
@@ -166,6 +214,8 @@ public class Stickman {
 		}
 	}
 	
+	
+	// Déplacement droite et mise en place de l'anime gauche si ce mouvement n'était pas d'activer lors du dernier tour
 	public void moveDroite(){
 		if(alive){
 			if(SAUT){
@@ -181,6 +231,7 @@ public class Stickman {
 		}
 	}
 	
+	// Mise en place du saut. Attention cette méthode ne provoque aucun mouvement du personnage. Elle permet juste d'inverser les effet de la gravité et de jouer le son du saut.
 	public void saut(){
 		if(alive){
 			if(!SAUT){
@@ -192,6 +243,7 @@ public class Stickman {
 		
 	}
 	
+	// Ceci est la méthode a appelé à chaque tour. Elle permet de gérer la chute et le saut. Elle met en place l'anime de saut si celui-ci est activé. Mise en route du compteur lié au saut.
 	public void Gravity(){
 		if(alive){
 			if(enableGravity){
@@ -218,10 +270,33 @@ public class Stickman {
 		
 	}
 	
+	
+	//Méthode permettant de dessiner sitckman
 	public void drawPlayer(Graphics g){
 		g.drawAnimation(playerAnim, playerX, playerY);
 	}
 	
+	
+	public void setDarkBackground(boolean darkBackground) throws SlickException{
+		if(!darkBackground){
+		//chargement des différentes animes.
+			sheet1 = new SpriteSheet(pathAnimArret,WIDTH,HEIGHT);
+			sheet2 = new SpriteSheet(pathAnimSaut,WIDTH,HEIGHT);
+			sheet3 = new SpriteSheet(pathAnimGauche,WIDTH,HEIGHT);
+			sheet4 = new SpriteSheet(pathAnimDroite,WIDTH,HEIGHT);
+			sheet5 = new SpriteSheet(pathAnimDead,WIDTH,HEIGHT);
+		}else {
+			sheet1 = new SpriteSheet(pathAnimArretD,WIDTH,HEIGHT);
+			sheet2 = new SpriteSheet(pathAnimSautD,WIDTH,HEIGHT);
+			sheet3 = new SpriteSheet(pathAnimGaucheD,WIDTH,HEIGHT);
+			sheet4 = new SpriteSheet(pathAnimDroiteD,WIDTH,HEIGHT);
+			sheet5 = new SpriteSheet(pathAnimDeadD,WIDTH,HEIGHT);
+		}	
+		
+	}
+	
+	
+	// Méthode a appelé lors d'un collision. Elle permet d'annulé le dernier mouvement effectué.
 	public void cancelLastMouvement(){
 		if(alive){
 			switch (lastMouvement) 
@@ -275,6 +350,7 @@ public class Stickman {
 		DROITE=false;
 	}
 	
+	// méthode permettant de gérer le son lié à la collision.
 	public void collision(){
 		collision=true;
 	}
@@ -286,9 +362,8 @@ public class Stickman {
 		collision=false;
 	}
 	
-	
+	// Mise en place des différentes animation représentant stickman
 	public void setAnimArret(){
-		// Mise en place l'animation représentant stickman
 		playerAnim=new Animation();
 		for (int frame=0;frame<1;frame++) {
 			playerAnim.addFrame(sheet1.getSprite(frame,0), 150);

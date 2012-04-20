@@ -11,7 +11,7 @@ public  class Obstacle {
 	protected int posX;
 	protected int posY;
 	
-
+	
 	protected int width;
 	protected int height;
 	
@@ -19,6 +19,8 @@ public  class Obstacle {
 	protected Polygon polygonObstacle;
 	
 	protected boolean danger;
+	
+	
 	
 	public Obstacle(int posX, int posY,int width,int height,String pathObstacle,boolean danger) throws SlickException{
 		this.posX=posX*16;
@@ -38,6 +40,8 @@ public  class Obstacle {
 	}
 	
 
+	
+	
 	public void drawObstacle(Graphics g){
 		if(obstacle!=null){
 			for(int i=0;i<width/16;i++){

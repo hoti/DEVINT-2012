@@ -14,6 +14,9 @@
  <tileset firstgid="43" name="porte" tilewidth="16" tileheight="16">
   <image source="porte.png" width="32" height="32"/>
  </tileset>
+ <tileset firstgid="47" name="FlecheG" tilewidth="16" tileheight="16">
+  <image source="FlecheGauche.png" width="64" height="32"/>
+ </tileset>
  <layer name="collision" width="40" height="30">
   <properties>
    <property name="collision" value=""/>

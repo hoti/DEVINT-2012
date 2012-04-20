@@ -18,6 +18,7 @@ public class Block  {
 	}
  
 	public void draw(Graphics g) {
+		g.fill (poly);
 		g.draw(poly);
 	}
 }
