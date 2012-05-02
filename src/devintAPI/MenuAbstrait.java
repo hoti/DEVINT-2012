@@ -45,10 +45,10 @@ public abstract class MenuAbstrait extends DevintFrameListener implements
 	protected final String nomJeu;
 
 	// les noms des options
-	private String[] nomOptions;
+	protected String[] nomOptions;
 
 	// les boutons associ�s aux options
-	private JButton[] boutonOption;
+	protected JButton[] boutonOption;
 
 	// le nombre d'options
 	private int nbOption;
@@ -172,7 +172,7 @@ public abstract class MenuAbstrait extends DevintFrameListener implements
 	/**
 	 * creer les boutons associ�s aux noms d'options
 	 */
-	private void creerOption(String[] noms) {
+	protected void creerOption(String[] noms) {
 		// cr�ation des boutons
 		// panel des boutons
 		JPanel boutons = new JPanel();
@@ -195,7 +195,7 @@ public abstract class MenuAbstrait extends DevintFrameListener implements
 	}
 
 	// pour cr�er un bouton associ� � un texte
-	private void creerBouton(int i, String texte) {
+	protected void creerBouton(int i, String texte) {
 		boutonOption[i] = new JButton();
 		boutonOption[i].setText(texte);
 		setPropertiesButton(boutonOption[i]);
@@ -267,7 +267,7 @@ public abstract class MenuAbstrait extends DevintFrameListener implements
 
 	// mettre le focus sur une option
 	protected void setFocusedButton(int i) {
-		voix.playShortText(boutonOption[i].getText());
+		voix.playShortText(nomOptions[i]);
 		boutonOption[i].setBackground(backgroundColor);
 		boutonOption[i].setForeground(foregroundColor);
 	}
@@ -337,6 +337,7 @@ public abstract class MenuAbstrait extends DevintFrameListener implements
 			}
 			boutonOption[i].setBorder(buttonBorder);
 		}
+		
 	}
  
 }

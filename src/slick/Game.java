@@ -64,10 +64,10 @@ public class Game extends BasicGame {
 	
 		if(begin){
 			container.setVSync(true);
-			container.setMaximumLogicUpdateInterval(22);
-			container.setMinimumLogicUpdateInterval(22);
+			container.setMaximumLogicUpdateInterval(15);
+			container.setMinimumLogicUpdateInterval(15);
 			container.setShowFPS(false);
-			container.setFullscreen(true);
+			//container.setFullscreen(true);
 			
 			
 			 this.font = new UnicodeFont("../ressources/images/impact.ttf", 48,
@@ -112,7 +112,6 @@ public class Game extends BasicGame {
 			break;
 		}
 		
-		//this.switchMap();
 		
 		joueur=new Stickman(map.getXStart(),map.getYStart(),dark);
 		step=0;
@@ -390,26 +389,7 @@ public class Game extends BasicGame {
 
 	}
 	
-	public void switchMap() throws SlickException{
-		
-		switch(nbMap){
-		case 1:
-			if(dark){
-				map.setMap(new BlockMap("../ressources/images/map1B.tmx"));
-			}else map.setMap(new BlockMap("../ressources/images/map1.tmx"));
-			break;
-		case 2:
-			if(dark){
-				map.setMap(new BlockMap("../ressources/images/map2B.tmx"));
-			}else map.setMap(new BlockMap("../ressources/images/map2.tmx"));
-			break;
-		case 3: 
-			if(dark){
-				map.setMap(new BlockMap("../ressources/images/map3B.tmx"));
-			}else map.setMap(new BlockMap("../ressources/images/map3.tmx"));
-			break;
-		}
-	}
+
  
 	public void render(GameContainer container, Graphics g)  {
 		

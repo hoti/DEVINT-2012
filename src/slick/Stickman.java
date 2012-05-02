@@ -10,7 +10,7 @@ import org.newdawn.slick.geom.Polygon;
 /** Classe représentant stickman, le personnage évoluant dans une niveau.
  * Cette classe permet notamment de faire évoluer le personnage sur 2 axes (gestion des gifs inclus).
  * 
- * @author François
+ * @author F.GILBERT
  *
  */
 

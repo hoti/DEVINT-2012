@@ -29,7 +29,7 @@ public class MenuJeu extends MenuAbstrait {
      **/
 	protected String[] nomOptions() {
 
-		String[] noms = {"Jouer","Choix du niveau", "Niveau de difficulte", "Choix des couleurs", "Quitter"};
+		String[] noms = {"Jouer", "Niveau de difficulte", "Choix des couleurs","Scores", "Quitter"};
 		return noms;
 
 	}
@@ -40,14 +40,16 @@ public class MenuJeu extends MenuAbstrait {
 	protected void lancerOption(int i) {
 		switch (i){  
 			case 0 : 
-				try {
+				/*try {
+					
 					new Game().launch();
 				} catch (SlickException e) {}
-		    	
+		    	*/
+				this.setVisible(false);new MenuJoueur();
 				break;
-			case 1 : this.setVisible(false); new MenuNiveau(); break;
-			case 2 : this.setVisible(false); new MenuDifficulte(); break;
-			case 3 : this.setVisible(false); new MenuCouleurs(); break;
+			case 1 : this.setVisible(false); new MenuDifficulte(); break;
+			case 2 : this.setVisible(false); new MenuCouleurs(); break;
+			case 3 : this.setVisible(false); /*new Scores();*/ break; 
 			case 4 : System.exit(0); break;
 			default: System.err.println("action non définie");
 		}
